@@ -1,11 +1,14 @@
 ﻿using Microsoft.VisualStudio.Services.Users;
+using System.ComponentModel.DataAnnotations;
 
 namespace RestaurantApp.Entities
 {
     public class TOrder
     {
+        [Key, Required]
         public int Id { get; set; }
         public DateTime DateOfOrder { get; set; }
+        [Required, MaxLength(25)]
         public int Bill { get; set; }
         public string AdditionalComment { get; set; }
         public string State { get; set; }

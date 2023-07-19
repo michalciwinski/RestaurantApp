@@ -1,7 +1,10 @@
-﻿namespace RestaurantApp.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace RestaurantApp.Entities
 {
     public class TOrderPosition
     {
+        [Key, Required]
         public int Id { get; set; }
         //RELATION
         public virtual TMenu TMenu { get; set; }

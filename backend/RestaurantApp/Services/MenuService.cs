@@ -16,11 +16,11 @@ namespace RestaurantApp.Services
             _context = context;
         }
 
-        public List<MenuModel> GetDishes()
+        public List<ModelMenu> GetDishes()
         {
-            List <MenuModel> dishes = new List<MenuModel>();
+            List <ModelMenu> dishes = new List<ModelMenu>();
             var dishesList = _context.TMenu.ToList();
-            dishesList.ForEach(row => dishes.Add(new MenuModel()
+            dishesList.ForEach(row => dishes.Add(new ModelMenu()
             {
                 Id = row.Id,
                 Name = row.Name,
@@ -30,10 +30,10 @@ namespace RestaurantApp.Services
             return dishes;
         }
 
-        public MenuModel GetDish(int id)
+        public ModelMenu GetDish(int id)
         {
             var record = _context.TMenu.Find(id);
-            MenuModel dish = new MenuModel
+            ModelMenu dish = new ModelMenu
             {
                 Id = record.Id,
                 Name = record.Name,
@@ -43,7 +43,7 @@ namespace RestaurantApp.Services
             return dish;
         }
 
-        public int DeleteDish(MenuModel Dish) 
+        public int DeleteDish(ModelMenu Dish) 
         {
             var recordToDelete = _context.TMenu.Where(d => d.Name.Equals(Dish.Name) && 
                                     d.Description.Equals(Dish.Description) &&
@@ -60,7 +60,7 @@ namespace RestaurantApp.Services
             }
         }
 
-        public int AddDish(MenuModel Dish)
+        public int AddDish(ModelMenu Dish)
         {
             var recordToAdd = _context.TMenu.Where(d => d.Name.Equals(Dish.Name) &&
                                     d.Description.Equals(Dish.Description) &&
@@ -88,7 +88,7 @@ namespace RestaurantApp.Services
             
         }
 
-        public int UpdateDish(MenuModelToUpdate Dish)
+        public int UpdateDish(ModelMenuToUpdate Dish)
         {
             var recordToUpdate = _context.TMenu.Where(d => d.Name.Equals(Dish.Name) &&
                                     d.Description.Equals(Dish.Description) &&

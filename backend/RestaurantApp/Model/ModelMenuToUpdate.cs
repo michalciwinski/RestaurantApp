@@ -1,6 +1,6 @@
 ﻿namespace RestaurantApp.Model
 {
-    public class MenuModelToUpdate
+    public class ModelMenuToUpdate
     {
         public int Id { get; set; }
         public string Name { get; set; }

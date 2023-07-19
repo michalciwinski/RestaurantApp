@@ -24,21 +24,21 @@ namespace RestaurantApp.Controllers
 
         [HttpGet]
         [Route("GetDishes")]
-        public IEnumerable<MenuModel> Get() //IActionResult 
+        public IEnumerable<ModelMenu> Get() //IActionResult 
         {
             return _service.GetDishes();
         }
 
         [HttpGet]
         [Route("GetDish/{id}")]
-        public MenuModel Get(int id)  //IActionResult 
+        public ModelMenu Get(int id)  //IActionResult 
         {
             return _service.GetDish(id);
         }
 
         [HttpDelete]
         [Route("DeleteDish")] //bug - in json ID has to be written. Random nr can be there.(client site)
-        public ActionResult Delete([FromBody] MenuModel Dish)
+        public ActionResult Delete([FromBody] ModelMenu Dish)
         {
             var result = _service.DeleteDish(Dish);
             return StatusCode(result);
@@ -46,7 +46,7 @@ namespace RestaurantApp.Controllers
 
         [HttpPost]
         [Route("AddDish")]
-        public ActionResult Post([FromBody] MenuModel Dish)
+        public ActionResult Post([FromBody] ModelMenu Dish)
         {
             var result = _service.AddDish(Dish);
             return StatusCode(result);
@@ -55,7 +55,7 @@ namespace RestaurantApp.Controllers
 
         [HttpPut]
         [Route("UpdateDish")]
-        public ActionResult Put([FromBody] MenuModelToUpdate Dish)
+        public ActionResult Put([FromBody] ModelMenuToUpdate Dish)
         {
             var result = _service.UpdateDish(Dish);
             return StatusCode(result);

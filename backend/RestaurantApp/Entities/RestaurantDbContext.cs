@@ -59,6 +59,7 @@ public partial class RestaurantDbContext : DbContext
             .HasOne(t => t.TUserType)
             .WithMany(y => y.TUser)
             .HasForeignKey("UserTypeId");
+            
 
 
 
