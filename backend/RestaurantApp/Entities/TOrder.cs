@@ -17,10 +17,6 @@ namespace RestaurantApp.Entities
         public int TUserId { get; set; }
         public virtual TState TState { get; set; }
         public int TStateId { get; set; }
-
-
-
-
         public virtual List<TOrderPosition> TOrderPosition { get; set; }
     }
 }

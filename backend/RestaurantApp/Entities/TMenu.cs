@@ -17,6 +17,6 @@ public partial class TMenu
     //RELATION
     public virtual TDishType TDishType { get; set; }
     public int TDishTypeId { get; set; }
-    public virtual List<TOrderPosition> TOrderPosition { get; set; } //relation - many
+    public virtual List<TOrderPosition> TOrderPosition { get; set; } 
 
 }
