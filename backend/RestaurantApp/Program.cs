@@ -7,6 +7,7 @@ using RestaurantApp.Controllers;
 using RestaurantApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -18,6 +19,29 @@ builder.Services.AddDbContext<RestaurantDbContext>(
     o => o.UseNpgsql(builder.Configuration.GetConnectionString("EntitiesDB")));
 builder.Services.AddControllers();
 builder.Services.AddScoped<SeederDishType>();
+builder.Services.AddCors(options =>
+{
+     options.AddPolicy("AllowOrigin",
+       builder => { builder.WithOrigins("http://localhost:3000")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+           });
+                            
+
+    //builder => builder.AllowAnyOrigin() 
+    //                  .AllowAnyMethod()  
+    //                  .AllowAnyHeader()); 
+
+    //options.AddPolicy(name: MyAllowSpecificOrigins,
+   //                  policy =>
+    //                  {
+    //                      policy.WithOrigins("http://localhost:3000")
+    //                        .AllowAnyHeader()
+    //                        .AllowAnyMethod();
+     //                 });
+
+});// added becaouse of CORS problem on forntend
+
 
 
 var app = builder.Build();
@@ -42,6 +66,8 @@ if (app.Environment.IsDevelopment())
 }
 app.UseHttpsRedirection();
 app.UseAuthorization();
+
+app.UseCors("AllowOrigin");
 
 app.MapControllers();
 app.Run();
