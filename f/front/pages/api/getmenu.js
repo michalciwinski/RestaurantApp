@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Menuposition from "../menuf/menutableposition";
 import menupositionstyle from '../menuf/menutableposition.module.css';
+import MenuFilter from "../menuf/filtermenubutton.js"
 
 const tableHeaderListStyle = menupositionstyle['tableheader-list'];
 const tableHeaderStyle = menupositionstyle['tableheader'];
@@ -8,6 +9,7 @@ const tableHeaderStyle = menupositionstyle['tableheader'];
 class MenuList extends Component {
     state = {
       menuItems: [], //data from get operation
+      selectedCategory: "All", //first/defualt all data
     };
 
     
@@ -22,14 +24,22 @@ class MenuList extends Component {
           console.error("Error:", error);
         });
     }
+    handleCategoryChange = (category) => {
+      this.setState({ selectedCategory: category });
+    };
+
   
     render() {
-      const { menuItems } = this.state;
+      const { menuItems, selectedCategory } = this.state;
   
       return (
         <div>
           <h2>Menu</h2>
           
+          <MenuFilter
+            selectedCategory={selectedCategory}
+            onCategoryChange={this.handleCategoryChange}
+          />
             <ul className={tableHeaderListStyle}>
                 <li className={tableHeaderStyle}>ID</li>
                 <li className={tableHeaderStyle}>Name</li>
@@ -39,11 +49,18 @@ class MenuList extends Component {
                 <li className={tableHeaderStyle}>Amount</li>
             </ul>
 
-            <ul >
-                {menuItems.map((position) => (
-                    <Menuposition position={position} />
+            <ul>
+              {menuItems
+                .filter(
+                  (position) =>
+                    selectedCategory === "All" || position.dishType === selectedCategory
+                )
+                .map((position) => (
+                  <Menuposition key={position.id} position={position} />
                 ))}
             </ul>
+
+
         </div>
       );
     }

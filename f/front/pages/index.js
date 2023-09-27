@@ -18,7 +18,10 @@ export default function Home() {
         <h2>
           <Link href="/adminview/add">Admin</Link>
         </h2>
-      
+        <h2>
+          <Link href="/chat/chatmain">GPT</Link>
+        </h2>
+
     </>
   )
 }
