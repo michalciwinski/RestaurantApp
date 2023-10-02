@@ -1,10 +1,12 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
-//import styles from '@/styles/Home.module.css'
+import styles from '@/styles/Home.module.css'
 import Link from 'next/link'
+import Navigationtemplate from './navigationtemplate/navigationtemplate.js'
 
 const inter = Inter({ subsets: ['latin'] })
+
 
 export default function Home() {
   return (
@@ -12,15 +14,11 @@ export default function Home() {
       <Head>
         <title>Strona główna</title>
       </Head>
-        <h2>
-          <Link href="/menuf/menu">Menu</Link>
-        </h2>
-        <h2>
-          <Link href="/adminview/add">Admin</Link>
-        </h2>
-        <h2>
-          <Link href="/chat/chatmain">GPT</Link>
-        </h2>
+        <header>
+            
+        </header>
+      <Navigationtemplate></Navigationtemplate> 
+      
 
     </>
   )

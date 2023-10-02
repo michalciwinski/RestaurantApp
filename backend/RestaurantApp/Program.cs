@@ -5,6 +5,10 @@ using Microsoft.Extensions.Configuration.Json;
 using RestaurantApp.DBSeeder;
 using RestaurantApp.Controllers;
 using RestaurantApp.Services;
+using RestaurantApp.Services.Interface;
+using RestaurantApp.Services.Implementation;
+using RestaurantApp.Controllers.Implementation;
+using RestaurantApp.Controllers.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -19,6 +23,11 @@ builder.Services.AddDbContext<RestaurantDbContext>(
     o => o.UseNpgsql(builder.Configuration.GetConnectionString("EntitiesDB")));
 builder.Services.AddControllers();
 builder.Services.AddScoped<SeederDishType>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IMenuService, MenuService>();
+builder.Services.AddScoped<IController_Menu, Controller_Menu>();
+builder.Services.AddScoped<IController_UserAccount, Controller_UserAccount>();
+
 builder.Services.AddCors(options =>
 {
      options.AddPolicy("AllowOrigin",

@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using RestaurantApp.Controllers.Interface;
 using RestaurantApp.Entities;
 using RestaurantApp.Services;
 
-namespace RestaurantApp.Controllers
+namespace RestaurantApp.Controllers.Implementation
 {
     [Route("[controller]")]
     [ApiController]
-    public class Controller_Order : ControllerBase
+    public class Controller_Order : ControllerBase, IController_Order
     {
         private readonly OrderService _service;
         private readonly RestaurantDbContext _DB;

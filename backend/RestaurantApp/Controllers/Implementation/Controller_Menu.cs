@@ -2,24 +2,26 @@
 using Microsoft.AspNetCore.Mvc;
 using RestaurantApp.Entities;
 using RestaurantApp.Model;
-using RestaurantApp.Services;
 using System.Reflection.Metadata.Ecma335;
 using Microsoft.VisualStudio.Services.DelegatedAuthorization;
+using RestaurantApp.Controllers.Interface;
+using RestaurantApp.Services.Implementation;
+using RestaurantApp.Services.Interface;
 
-namespace RestaurantApp.Controllers
+namespace RestaurantApp.Controllers.Implementation
 {
-    
+
     [ApiController]
     [Route("[controller]/")]
-    public class Controller_Menu : ControllerBase
+    public class Controller_Menu : ControllerBase, IController_Menu
     {
-        private readonly MenuService _service;
+        private readonly IMenuService _service;
         private readonly RestaurantDbContext _DB;
 
-        public Controller_Menu()
+        public Controller_Menu(IMenuService menuService)
         {
             _DB = new RestaurantDbContext();
-            _service = new MenuService(_DB);
+            _service = menuService;
         }
 
         [HttpGet]

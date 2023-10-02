@@ -1,0 +1,25 @@
+.nav {
+    display: flex;
+    background-color: #333;
+    padding: 1rem 1.2rem;
+    font-size: 1rem;
+    justify-content: space-between;
+  }
+  
+  .ull1 {
+    list-style: none;
+    text-align: left;
+    display: flex;
+  }
+  .ull2 {
+    list-style: none;
+    text-align: right;
+    display: flex;
+  }
+  .lii{
+    padding: 0 1rem;
+  }
+  
+  .linkreload{
+    color: white;
+  }

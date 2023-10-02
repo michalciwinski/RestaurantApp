@@ -15,7 +15,7 @@ class Chatbot extends Component {
 
     this.setState({ messages: [...messages, `You: ${inputText}`] });
 
-    const OPENAI_API_KEY = "takichuj"; // Zastąp to swoim kluczem API OpenAI
+    const OPENAI_API_KEY = "takichu"; // Zastąp to swoim kluczem API OpenAI
 
     const requestOptions = {
         method: "POST",

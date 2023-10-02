@@ -3,13 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using RestaurantApp.Controllers;
 using RestaurantApp.Entities;
 using RestaurantApp.Model;
+using RestaurantApp.Services.Interface;
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
 
-namespace RestaurantApp.Services
+namespace RestaurantApp.Services.Implementation
 {
-    public class MenuService 
+    public class MenuService : IMenuService
     {
         private RestaurantDbContext _context;
         public MenuService(RestaurantDbContext context)
@@ -19,9 +20,9 @@ namespace RestaurantApp.Services
 
         public List<ModelMenu> GetDishes()
         {
-            List <ModelMenu> dishes = new List<ModelMenu>();
-            var dishesList = _context.TMenu.Include(e=>e.TDishType)
-                                           .OrderBy(e=>e.TDishTypeId)
+            List<ModelMenu> dishes = new List<ModelMenu>();
+            var dishesList = _context.TMenu.Include(e => e.TDishType)
+                                           .OrderBy(e => e.TDishTypeId)
                                            .ToList();
             dishesList.ForEach(row => dishes.Add(new ModelMenu()
             {
@@ -30,7 +31,7 @@ namespace RestaurantApp.Services
                 Description = row.Description,
                 Price = row.Price,
                 DishType = row.TDishType.Name,
-            })); 
+            }));
             return dishes;
         }
         //TO DO - else..
@@ -38,7 +39,8 @@ namespace RestaurantApp.Services
         {
             var record = _context.TMenu.Include(e => e.TDishType)
                                         .FirstOrDefault(e => e.Id == id);
-            if (record != null){
+            if (record != null)
+            {
                 ModelMenu dish = new ModelMenu
                 {
                     Id = record.Id,
@@ -62,12 +64,12 @@ namespace RestaurantApp.Services
                 return dish;
             }
 
-            
+
         }
 
-        public int DeleteDish(ModelMenu Dish) 
+        public int DeleteDish(ModelMenu Dish)
         {
-            var recordToDelete = _context.TMenu.Where(d => d.Name.Equals(Dish.Name) && 
+            var recordToDelete = _context.TMenu.Where(d => d.Name.Equals(Dish.Name) &&
                                     d.Description.Equals(Dish.Description) &&
                                     d.Price.Equals(Dish.Price)).FirstOrDefault();
             if (recordToDelete != null)
@@ -115,13 +117,13 @@ namespace RestaurantApp.Services
                 };
                 _context.TMenu.Add(DishTableDB);
                 _context.SaveChanges();
-                return 200; 
+                return 200;
             }
-            else  
+            else
             {
                 return 404;//other problem
             }
-            
+
         }
 
         public int UpdateDish(ModelMenuToUpdate Dish)
@@ -129,7 +131,7 @@ namespace RestaurantApp.Services
             var recordToUpdate = _context.TMenu.Where(d => d.Name.Equals(Dish.Name) &&
                                     d.Description.Equals(Dish.Description) &&
                                     d.Price.Equals(Dish.Price)).FirstOrDefault();
-            
+
             try
             {
                 if (Dish.NewName != "")
@@ -164,7 +166,7 @@ namespace RestaurantApp.Services
                 _context.SaveChanges();
                 return 200;
             }
-            catch 
+            catch
             {
 
 

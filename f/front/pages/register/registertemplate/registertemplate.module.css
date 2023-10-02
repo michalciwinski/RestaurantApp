@@ -1,0 +1,26 @@
+
+
+.inputscontainer{
+    width: 300px; /* Dostosuj szerokość kontenera do swoich potrzeb */
+    padding: 20px;
+    background-color: #a09c9c;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    
+}
+
+.form{
+    display: grid;
+    
+}
+
+.inputcontainer{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0.3rem;
+}
+
+.buttonconfirm{
+    justify-content: center;
+    width: 80%;
+}
