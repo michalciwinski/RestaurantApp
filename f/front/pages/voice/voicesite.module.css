@@ -1,0 +1,24 @@
+#speechtToText {
+    width:60%;
+    margin-left: 20%;
+}
+
+#speechtToTextLabel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+#textToSpeech{
+    width:60%;
+    margin-left: 20%;
+    margin-top: 30%;
+}
+#textToSpeechLabel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

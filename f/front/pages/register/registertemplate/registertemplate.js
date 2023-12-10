@@ -1,5 +1,6 @@
 import React from "react";
 import styles from './registertemplate.module.css'
+import RegisterButton from './registerbutton.js'
 
 export default function Register(){
     return (
@@ -8,28 +9,28 @@ export default function Register(){
                     <form className={styles.form}>
                         <div className={styles.inputcontainer}>
                             <label className={styles.label}>Firstname: </label>
-                            <input type="text" className={styles.input} />
+                            <input name="Firstname" type="text" className={styles.input} />
                         </div>
                         <div className={styles.inputcontainer}>
                             <label className={styles.label}>Lastname: </label>
-                            <input type="text" className={styles.input} />
+                            <input name="Lastname" type="text" className={styles.input} />
                         </div>
                         <div className={styles.inputcontainer}>
                             <label className={styles.label}>Email: </label>
-                            <input type="text" placeholder="email@example.com" className="input" />
+                            <input name="Email" type="text" placeholder="email@example.com" className="input" />
                         </div>
                         <div className={styles.inputcontainer}>
                             <label className={styles.label}>Password: </label>
-                            <input type="text" className={styles.input} />
+                            <input name="Password" type="text" className={styles.input} />
                         </div>
                         <div className={styles.inputcontainer}>
                             <label className={styles.label}>Confirm: </label>
-                            <input type="text" className={styles.input} />
+                            <input name="Confirm" type="text" className={styles.input} />
                         </div>
 
                     </form>
-
-                    <input type="button" className={styles.buttonconfirm}></input>
+                    <RegisterButton></RegisterButton>
+                    
 
                 </div>
                 

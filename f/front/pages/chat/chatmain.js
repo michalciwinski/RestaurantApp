@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+
+
 //chat wygenrowal kod do podlaczenia sie do chatu ;) na razie tylko do testow
 class Chatbot extends Component {
   state = {
@@ -15,7 +17,7 @@ class Chatbot extends Component {
 
     this.setState({ messages: [...messages, `You: ${inputText}`] });
 
-    const OPENAI_API_KEY = "takichu"; // Zastąp to swoim kluczem API OpenAI
+    const OPENAI_API_KEY = "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"; // Zastąp to swoim kluczem API OpenAI
 
     const requestOptions = {
         method: "POST",
@@ -35,6 +37,7 @@ class Chatbot extends Component {
     fetch("https://api.openai.com/v1/engines/gpt-3.5-turbo/completions", requestOptions)
         .then((response) => response.json())
         .then((data) => {
+        console.log(data); 
         const chatbotResponse = `Chatbot: ${data.choices[0].message.content}`;
         this.setState({ messages: [...messages, chatbotResponse] });
         })

@@ -16,7 +16,7 @@ public partial class RestaurantDbContext : DbContext
     {
     }
 
-    public virtual DbSet<TOrderPosition> TOrder { get; set; }
+    public virtual DbSet<TOrder> TOrder { get; set; }
     public virtual DbSet<TOrderPosition> TOrderPosition { get; set; }
     public virtual DbSet<TMenu> TMenu { get; set; }
     public virtual DbSet<TDishType> TDishType { get; set; }
@@ -43,7 +43,8 @@ public partial class RestaurantDbContext : DbContext
         modelBuilder.Entity<TOrder>()//Order<->OrderPosition
             .HasMany(y => y.TOrderPosition)
             .WithOne(t => t.TOrder)
-            .HasForeignKey(t => t.TOrderId);
+            .HasForeignKey(y => y.TOrderId)
+            .IsRequired(false);
 
         modelBuilder.Entity<TUser>()//User<->Order
             .HasMany(y => y.TOrder)
@@ -58,7 +59,7 @@ public partial class RestaurantDbContext : DbContext
         modelBuilder.Entity<TUser>()//UserType<->TUser
             .HasOne(t => t.TUserType)
             .WithMany(y => y.TUser)
-            .HasForeignKey("UserTypeId");
+            .HasForeignKey("TUserTypeId");
             
 
 

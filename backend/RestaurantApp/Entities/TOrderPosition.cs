@@ -2,7 +2,7 @@
 
 namespace RestaurantApp.Entities
 {
-    public class TOrderPosition
+    public partial class TOrderPosition
     {
         [Key, Required]
         public int Id { get; set; }

@@ -8,9 +8,9 @@ import MenuList from "../api/getmenu";
 
 const YourComponent = () => (
     <Image
-      src="/images/drwal.jpg" // Route of the image file
-      height={144} // Desired size with correct aspect ratio
-      width={144} // Desired size with correct aspect ratio
+      src="/images/drwal.jpg" 
+      height={144} 
+      width={144} 
       alt="burger drwala"
     />
   );

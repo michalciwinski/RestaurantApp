@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "jVSdY9tBYKvbSYqeClSnyRXCllgTZc0eiOa+p8IvsdTPSXKiBX3krYx9mp5fNKAbOCWSnJrGQUz+SE9rJs+nMQ==",
+  "dgSpecHash": "+TmoIK/SdIteA4/M8NlHd2SNKPlrfZcO6PiEdEWwnuO0TeGtS+RqPvehZmvBhWDyauYOjEIBnOgXv3+X3KR8tw==",
   "success": true,
   "projectFilePath": "D:\\AppRestaurant\\backend\\RestaurantApp\\RestaurantApp.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Z006KDFH\\.nuget\\packages\\fluentvalidation\\11.5.1\\fluentvalidation.11.5.1.nupkg.sha512",
+    "C:\\Users\\Z006KDFH\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
+    "C:\\Users\\Z006KDFH\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.1\\fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
     "C:\\Users\\Z006KDFH\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Z006KDFH\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.7\\microsoft.aspnet.webapi.client.5.2.7.nupkg.sha512",
     "C:\\Users\\Z006KDFH\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.8\\microsoft.entityframeworkcore.7.0.8.nupkg.sha512",

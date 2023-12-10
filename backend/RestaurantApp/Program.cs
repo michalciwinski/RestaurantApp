@@ -23,10 +23,12 @@ builder.Services.AddDbContext<RestaurantDbContext>(
     o => o.UseNpgsql(builder.Configuration.GetConnectionString("EntitiesDB")));
 builder.Services.AddControllers();
 builder.Services.AddScoped<SeederDishType>();
-builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IMenuService, MenuService>();
 builder.Services.AddScoped<IController_Menu, Controller_Menu>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IController_UserAccount, Controller_UserAccount>();
+builder.Services.AddScoped<IController_Order, Controller_Order>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 builder.Services.AddCors(options =>
 {

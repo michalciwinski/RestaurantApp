@@ -82,20 +82,17 @@ namespace RestaurantApp.Migrations
                     b.Property<string>("AdditionalComment")
                         .HasColumnType("text");
 
-                    b.Property<int>("Bill")
+                    b.Property<double>("Bill")
                         .HasMaxLength(25)
-                        .HasColumnType("integer");
+                        .HasColumnType("double precision");
 
                     b.Property<DateTime>("DateOfOrder")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("State")
-                        .HasColumnType("text");
-
-                    b.Property<int>("TStateId")
+                    b.Property<int?>("TStateId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("TUserId")
+                    b.Property<int?>("TUserId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -174,12 +171,9 @@ namespace RestaurantApp.Migrations
                     b.Property<int>("TUserTypeId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("UserTypeId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserTypeId");
+                    b.HasIndex("TUserTypeId");
 
                     b.ToTable("TUser");
                 });
@@ -217,15 +211,11 @@ namespace RestaurantApp.Migrations
                 {
                     b.HasOne("RestaurantApp.Entities.TState", "TState")
                         .WithMany("TOrder")
-                        .HasForeignKey("TStateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TStateId");
 
                     b.HasOne("RestaurantApp.Entities.TUser", "TUser")
                         .WithMany("TOrder")
-                        .HasForeignKey("TUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TUserId");
 
                     b.Navigation("TState");
 
@@ -242,9 +232,7 @@ namespace RestaurantApp.Migrations
 
                     b.HasOne("RestaurantApp.Entities.TOrder", "TOrder")
                         .WithMany("TOrderPosition")
-                        .HasForeignKey("TOrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TOrderId");
 
                     b.Navigation("TMenu");
 
@@ -255,7 +243,7 @@ namespace RestaurantApp.Migrations
                 {
                     b.HasOne("RestaurantApp.Entities.TUserType", "TUserType")
                         .WithMany("TUser")
-                        .HasForeignKey("UserTypeId")
+                        .HasForeignKey("TUserTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

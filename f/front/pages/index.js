@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
-    <>
+    <div>
       <Head>
         <title>Strona główna</title>
       </Head>
@@ -20,6 +20,6 @@ export default function Home() {
       <Navigationtemplate></Navigationtemplate> 
       
 
-    </>
+    </div>
   )
 }

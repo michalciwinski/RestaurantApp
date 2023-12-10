@@ -24,14 +24,12 @@ function Addtodatebase(data){
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        return response.json(); // Parsuj odpowiedź jako JSON
+        return response.json();
       })
       .then(data => {
-        // Obsłuż poprawną odpowiedź tutaj
         console.log('Success:', data);
       })
       .catch(error => {
-        // Obsłuż błąd tutaj
         console.error('Error:', error);
       });
 }
@@ -40,22 +38,7 @@ function Addtodatebase(data){
 
 
 export default function AddDish() {
-    /*const [formData, setFormData] = useState({
-        id: 0,
-        name: "",
-        description: "",
-        price: "",
-        category: ""
-    });
 
-    const handleChange = e => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
-        console.log('value is:', formData);
-    };*/
     const handleSubmit = (e) => {
         const nameInput = document.querySelector('input[name="name"]');
         const descriptionInput = document.querySelector('input[name="description"]');
@@ -65,14 +48,7 @@ export default function AddDish() {
         const descriptionValue = descriptionInput.value;
         const priceValue = priceInput.value;
         const categoryValue = categorySelect.value;
-        /*setFormData({
-            id: 0, 
-            name: nameValue,
-            description: descriptionValue,
-            price: priceValue,
-            category: categoryValue
-        });*/
-        //console.log('value is:', formData);
+
         const newDish = {
             id: 0,
             name: nameValue,
@@ -106,9 +82,6 @@ export default function AddDish() {
                 </select>
                 <button className={button} onClick={handleSubmit}>Add Dish
                 </button>
-
-                
-                
             </form>
 
             <h2>
