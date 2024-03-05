@@ -1,0 +1,65 @@
+[
+    {
+        "id": 1,
+        "name": "Burger Drwala",
+        "nameOfIngredients": [
+            "Bułka pszenna",
+            "Ser oscypek",
+            "Frytki z ziemniaków",
+            "Mięso wołowe",
+            "Cebula",
+            "Olej"
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Zupa pomidorowa",
+        "nameOfIngredients": [
+            "Bulion",
+            "Koncentrat pomidorowy",
+            "Mięso z kaczki",
+            "Czosnek",
+            "Makaron z mąki pszennej"
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Rosół z kaczki",
+        "nameOfIngredients": [
+            "Bulion",
+            "Mięso z kaczki",
+            "Makaron z mąki pszennej"
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Spaghetti",
+        "nameOfIngredients": [
+            "Koncentrat pomidorowy",
+            "Makaron z mąki pszennej",
+            "Pomidory w kawałkach",
+            "Czosnek",
+            "Cebula",
+            "Mięso wołowe"
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Capriociosa",
+        "nameOfIngredients": [
+            "Koncentrat pomidorowy",
+            "Olej",
+            "Szynka",
+            "Pieczarki"
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Pomidorowa",
+        "nameOfIngredients": [
+            "Makaron z mąki pszennej",
+            "Pomidory w kawałkach",
+            "Mleko"
+        ]
+    }
+]

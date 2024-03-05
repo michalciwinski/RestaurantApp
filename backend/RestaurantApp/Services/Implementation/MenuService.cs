@@ -21,8 +21,8 @@ namespace RestaurantApp.Services.Implementation
         public List<ModelMenu> GetDishes()
         {
             List<ModelMenu> dishes = new List<ModelMenu>();
-            var dishesList = _context.TMenu.Include(e => e.TDishType)
-                                           .OrderBy(e => e.TDishTypeId)
+            var dishesList = _context.Tmenus.Include(e => e.TdishType)
+                                           .OrderBy(e => e.TdishTypeId)
                                            .ToList();
             dishesList.ForEach(row => dishes.Add(new ModelMenu()
             {
@@ -30,14 +30,14 @@ namespace RestaurantApp.Services.Implementation
                 Name = row.Name,
                 Description = row.Description,
                 Price = row.Price,
-                DishType = row.TDishType.Name,
+                DishType = row.TdishType.Name,
             }));
             return dishes;
         }
         //TO DO - else..
         public ModelMenu GetDish(int id)
         {
-            var record = _context.TMenu.Include(e => e.TDishType)
+            var record = _context.Tmenus.Include(e => e.TdishType)
                                         .FirstOrDefault(e => e.Id == id);
             if (record != null)
             {
@@ -47,7 +47,7 @@ namespace RestaurantApp.Services.Implementation
                     Name = record.Name,
                     Description = record.Description,
                     Price = record.Price,
-                    DishType = record.TDishType.Name
+                    DishType = record.TdishType.Name
                 };
                 return dish;
             }
@@ -69,12 +69,12 @@ namespace RestaurantApp.Services.Implementation
 
         public int DeleteDish(ModelMenu Dish)
         {
-            var recordToDelete = _context.TMenu.Where(d => d.Name.Equals(Dish.Name) &&
+            var recordToDelete = _context.Tmenus.Where(d => d.Name.Equals(Dish.Name) &&
                                     d.Description.Equals(Dish.Description) &&
                                     d.Price.Equals(Dish.Price)).FirstOrDefault();
             if (recordToDelete != null)
             {
-                _context.TMenu.Remove(recordToDelete);
+                _context.Tmenus.Remove(recordToDelete);
                 _context.SaveChanges();
                 return 200;
             }
@@ -86,7 +86,7 @@ namespace RestaurantApp.Services.Implementation
 
         public int AddDish(ModelMenu Dish)
         {
-            var checkDb = _context.TMenu.Where(d => d.Name.Equals(Dish.Name) &&
+            var checkDb = _context.Tmenus.Where(d => d.Name.Equals(Dish.Name) &&
                                     d.Description.Equals(Dish.Description) &&
                                     d.Price.Equals(Dish.Price)).FirstOrDefault();
             if (checkDb != null)
@@ -108,14 +108,14 @@ namespace RestaurantApp.Services.Implementation
                     DishID = 5;
                 else
                     DishID = 0;
-                TMenu DishTableDB = new TMenu
+                Tmenu DishTableDB = new Tmenu
                 {
                     Name = Dish.Name,
                     Description = Dish.Description,
                     Price = Dish.Price,
-                    TDishTypeId = DishID
+                    TdishTypeId = DishID
                 };
-                _context.TMenu.Add(DishTableDB);
+                _context.Tmenus.Add(DishTableDB);
                 _context.SaveChanges();
                 return 200;
             }
@@ -128,7 +128,7 @@ namespace RestaurantApp.Services.Implementation
 
         public int UpdateDish(ModelMenuToUpdate Dish)
         {
-            var recordToUpdate = _context.TMenu.Where(d => d.Name.Equals(Dish.Name) &&
+            var recordToUpdate = _context.Tmenus.Where(d => d.Name.Equals(Dish.Name) &&
                                     d.Description.Equals(Dish.Description) &&
                                     d.Price.Equals(Dish.Price)).FirstOrDefault();
 
@@ -161,7 +161,7 @@ namespace RestaurantApp.Services.Implementation
                         DishID = 5;
                     else
                         DishID = 0;
-                    recordToUpdate.TDishTypeId = DishID;
+                    recordToUpdate.TdishTypeId = DishID;
                 }
                 _context.SaveChanges();
                 return 200;

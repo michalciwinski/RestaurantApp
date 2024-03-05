@@ -7,9 +7,9 @@ namespace RestaurantApp.Controllers.Interface
     {
         IEnumerable<ModelMenu> Get();
         ModelMenu Get(int id);
-        ActionResult Delete(ModelMenu Dish);
-        ActionResult Post(ModelMenu Dish);
-        ActionResult Put(ModelMenuToUpdate Dish);
+        IActionResult Delete(ModelMenu Dish);
+        IActionResult Post(ModelMenu Dish);
+        IActionResult Put(ModelMenuToUpdate Dish);
 
 
     }

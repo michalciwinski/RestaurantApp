@@ -13,11 +13,11 @@ namespace RestaurantApp.Controllers.Implementation
     public class Controller_Order : ControllerBase, IController_Order
     {
         private readonly IOrderService _service;
-        private readonly RestaurantDbContext _DB;
+        //private readonly RestaurantDbContext _DB;
 
         public Controller_Order(IOrderService orderService)
         {
-            _DB = new RestaurantDbContext();
+            //_DB = new RestaurantDbContext();
             _service = orderService;
         }
 

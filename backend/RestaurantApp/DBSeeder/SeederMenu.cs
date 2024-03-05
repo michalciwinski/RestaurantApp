@@ -9,23 +9,23 @@ namespace RestaurantApp.DBSeeder
         {
             _context = context;
         }
-        private IEnumerable<TMenu> GetTMenu()
+        private IEnumerable<Tmenu> GetTMenu()
         {
-            var MenuList = new List<TMenu>()
+            var MenuList = new List<Tmenu>()
             {
-                new TMenu()
+                new Tmenu()
                 {
                     Name = "Burger Drwala",
                     Description = "Burger wołowy z oscypkiem,  w zestawie frytki",
                     Price = 38.5,
-                    TDishTypeId = 3,
+                    TdishTypeId = 3,
                 },
-                new TMenu()
+                new Tmenu()
                 {
                     Name = "Zupa pomidorowa",
                     Description = "Zupka pomidorowa na rosole z wczoraj",
                     Price = 12.5,
-                    TDishTypeId = 2,
+                    TdishTypeId = 2,
                 }
             };
             return MenuList;
@@ -35,10 +35,10 @@ namespace RestaurantApp.DBSeeder
         {
             if (_context.Database.CanConnect())
             {
-                if (!_context.TMenu.Any())
+                if (!_context.Tmenus.Any())
                 {
                     var Menu = GetTMenu();
-                    _context.TMenu.AddRange(Menu);
+                    _context.Tmenus.AddRange(Menu);
                     _context.SaveChanges();
                 }
             }

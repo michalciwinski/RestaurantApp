@@ -1,17 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
-namespace RestaurantApp.Entities
+namespace RestaurantApp.Entities;
+
+public partial class TorderPosition
 {
-    public partial class TOrderPosition
-    {
-        [Key, Required]
-        public int Id { get; set; }
-        //RELATION
-        public virtual TMenu TMenu { get; set; }
-        public int TMenuId { get; set; }
-        public virtual TOrder TOrder { get; set; }
-        public int TOrderId { get; set; }
+    public int Id { get; set; }
 
+    public int TmenuId { get; set; }
 
-    }
+    public int TorderId { get; set; }
+
+    public virtual Tmenu Tmenu { get; set; }
+
+    public virtual Torder Torder { get; set; }
 }

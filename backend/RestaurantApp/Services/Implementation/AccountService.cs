@@ -15,23 +15,23 @@ namespace RestaurantApp.Services.Implementation
 
         public ActionResult RegisterUser(ModelUserRegister UserDto)
         {
-            var newUser = new TUser()
+            var newUser = new Tuser()
             {
                 FirstName = UserDto.FirstName,
                 LastName = UserDto.LastName,
                 Email = UserDto.Email,
-                QR = "123",//to do
+                Qr = "123",//to do
                 Password = UserDto.Password,
-                TUserTypeId = UserDto.TUserTypeId,          
+                TuserTypeId = UserDto.TUserTypeId,          
             };
             try
             {
-                _context.TUser.Add(newUser);
+                _context.Tusers.Add(newUser);
                 _context.SaveChanges();
                 return Ok();
             }
-             catch(Exception ex)
-             {
+            catch(Exception ex)
+            {
                   return BadRequest("error with adding user to database"); 
             }
         }

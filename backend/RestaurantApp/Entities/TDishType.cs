@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace RestaurantApp.Entities;
 
-public partial class TDishType
+public partial class TdishType
 {
-    [Key, Required]
     public int Id { get; set; }
-    [Required,MaxLength(25)]
-    public string Name { get; set; } = null!;
-    //RELATION
-    public virtual List<TMenu> TMenu { get; set; }
+
+    public string Name { get; set; }
+
+    public virtual ICollection<Tmenu> Tmenus { get; set; } = new List<Tmenu>();
 }

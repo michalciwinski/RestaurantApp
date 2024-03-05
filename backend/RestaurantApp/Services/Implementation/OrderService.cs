@@ -24,39 +24,16 @@ namespace RestaurantApp.Services.Implementation
             {
                 return BadRequest();
             }
-            TOrder neworder = new TOrder
+            Torder neworder = new Torder
             {
                 DateOfOrder = Order.DateOfOrder,
                 Bill = Order.Bill,
                 AdditionalComment = Order.AdditionalComment,
-                TStateId = Order.StateId,
+                TstateId = Order.StateId,
             };
 
-            // Dodawanie zamówienia do bazy danych
-             _context.TOrder.Add(neworder);
+             _context.Torders.Add(neworder);
              _context.SaveChanges();
-        //    List<ModelOrder> dishes = new List<ModelOrder>();
-
-            /*    if (Order.OrderPositions != null && Order.OrderPositions.Any())
-                {
-                    foreach (var Position in Order.OrderPositions)
-                    {
-                        for (int i = 0; i < Position.Ilosc; i++)
-                        {
-                            TOrderPosition OrderPosition = new TOrderPosition
-                            {
-                                TMenuId = Position[i].TMenuId,
-                                TOrderId = Position[i].OrderId, // Załóżmy, że przekazujesz również OrderId z frontu
-                                                                  // Możesz dodać inne właściwości pozycji zamówienia
-                            };
-
-                            // Dodawanie pozycji zamówienia do bazy danych
-                            _context.Set<TOrderPosition>().Add(pozycjaZamowienia); // Użyj Set<T>() w EF Core, jeśli nie znasz typu T podczas kompilacji
-                        }
-                    }
-                }*/
-
-
 
             try
             {

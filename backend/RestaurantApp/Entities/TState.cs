@@ -1,14 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
-namespace RestaurantApp.Entities
+namespace RestaurantApp.Entities;
+
+public partial class Tstate
 {
-    public class TState
-    {
-        [Key, Required]
-        public int Id { get; set; }
-        [Required,MaxLength(25)]
-        public string Name { get; set; }
-        //RELATION
-        public virtual List<TOrder> TOrder { get; set; }
-    }
+    public int Id { get; set; }
+
+    public string Name { get; set; }
+
+    public virtual ICollection<Torder> Torders { get; set; } = new List<Torder>();
 }

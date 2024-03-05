@@ -1,0 +1,37 @@
+
+  {
+    "Name": "Zupa pomidorowa",
+    "Description": "Zupka pomidorowa na rosole z wczoraj.",
+    "Price": 12.5,
+    "Dishtype": "Soup"
+  },
+  {
+    "Name": "Rosół z kaczki",
+    "Description": "Rosół z kaczki.",
+    "Price": 12,
+    "Dishtype": "Soup"
+  },
+  {
+    "Name": "Spaghetti",
+    "Description": "Włoski makaron z sosem bolognese.",
+    "Price": 28,
+    "Dishtype": "Main course"
+  },
+  {
+    "Name": "Capriociosa",
+    "Description": "Wloska pizza capriciosa z szynka.",
+    "Price": 25,
+    "Dishtype": "Main course"
+  },
+  {
+    "Name": "Pomidorowa",
+    "Description": "Zupa pomidorowa na słodko.",
+    "Price": 12,
+    "Dishtype": "Soup"
+  },
+  {
+    "Name": "Burger Drwala",
+    "Description": "Burger wołowy z oscypkiem,  w zestawie frytki",
+    "Price": 38.5,
+    "Dishtype": "Main course"
+  }

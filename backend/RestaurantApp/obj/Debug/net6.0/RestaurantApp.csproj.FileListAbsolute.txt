@@ -195,3 +195,6 @@ D:\AppRestaurant\backend\RestaurantApp\obj\Debug\net6.0\ref\RestaurantApp.dll
 D:\AppRestaurant\backend\RestaurantApp\bin\Debug\net6.0\FluentValidation.dll
 D:\AppRestaurant\backend\RestaurantApp\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
 D:\AppRestaurant\backend\RestaurantApp\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll
+D:\AppRestaurant\backend\RestaurantApp\bin\Debug\net6.0\OpenAI-DotNet.dll
+D:\AppRestaurant\backend\RestaurantApp\bin\Debug\net6.0\JSON_Asisstant\MenuIngredients.json
+D:\AppRestaurant\backend\RestaurantApp\bin\Debug\net6.0\JSON_Asisstant\MenuPricesDishType.json

@@ -615,6 +615,15 @@
           }
         }
       },
+      "OpenAI-DotNet/7.6.5": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/OpenAI-DotNet.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/OpenAI-DotNet.dll": {}
+        }
+      },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
         "type": "package",
         "runtimeTargets": {
@@ -3213,6 +3222,21 @@
         "npgsql.entityframeworkcore.postgresql.7.0.4.nupkg.sha512",
         "npgsql.entityframeworkcore.postgresql.nuspec",
         "postgresql.png"
+      ]
+    },
+    "OpenAI-DotNet/7.6.5": {
+      "sha512": "su6b7uJAFoSug8x017NPtOShmiyW7qo0vyg0M2Pnqr88+7MkFfUs42pmO+Fq3MdToaMoxPBRUiKwdSNPpcXkdQ==",
+      "type": "package",
+      "path": "openai-dotnet/7.6.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Assets/OpenAI-DotNet-Icon.png",
+        "LICENSE",
+        "README.md",
+        "lib/net6.0/OpenAI-DotNet.dll",
+        "openai-dotnet.7.6.5.nupkg.sha512",
+        "openai-dotnet.nuspec"
       ]
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
@@ -7110,6 +7134,7 @@
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.8",
       "Microsoft.VisualStudio.Services.Client >= 16.205.1",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 7.0.4",
+      "OpenAI-DotNet >= 7.6.5",
       "Swashbuckle.AspNetCore >= 6.5.0"
     ]
   },
@@ -7174,6 +7199,10 @@
           "Npgsql.EntityFrameworkCore.PostgreSQL": {
             "target": "Package",
             "version": "[7.0.4, )"
+          },
+          "OpenAI-DotNet": {
+            "target": "Package",
+            "version": "[7.6.5, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",

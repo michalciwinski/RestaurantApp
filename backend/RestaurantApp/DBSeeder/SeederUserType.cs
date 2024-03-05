@@ -9,19 +9,19 @@ namespace RestaurantApp.DBSeeder
         {
             _context = context;
         }
-        private IEnumerable<TUserType> GetTUserType()
+        private IEnumerable<TuserType> GetTUserType()
         {
-            var USerTypeList = new List<TUserType>()
+            var USerTypeList = new List<TuserType>()
             {
-                new TUserType()
+                new TuserType()
                 {
                     Type = "Admin",
                 },
-                new TUserType()
+                new TuserType()
                 {
                     Type = "User",
                 },
-                new TUserType()
+                new TuserType()
                 {
                     Type = "Guest",
                 }
@@ -35,10 +35,10 @@ namespace RestaurantApp.DBSeeder
         {
             if (_context.Database.CanConnect())
             {
-                if (!_context.TUserType.Any())
+                if (!_context.TuserTypes.Any())
                 {
                     var UserType = GetTUserType();
-                    _context.TUserType.AddRange(UserType);
+                    _context.TuserTypes.AddRange(UserType);
                     _context.SaveChanges();
                 }
             }

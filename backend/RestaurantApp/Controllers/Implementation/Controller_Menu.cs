@@ -16,11 +16,9 @@ namespace RestaurantApp.Controllers.Implementation
     public class Controller_Menu : ControllerBase, IController_Menu
     {
         private readonly IMenuService _service;
-        private readonly RestaurantDbContext _DB;
 
         public Controller_Menu(IMenuService menuService)
         {
-            _DB = new RestaurantDbContext();
             _service = menuService;
         }
 
@@ -40,7 +38,7 @@ namespace RestaurantApp.Controllers.Implementation
 
         [HttpDelete]
         [Route("DeleteDish")] //bug - in json ID has to be written. Random nr can be there.(client site)
-        public ActionResult Delete([FromBody] ModelMenu Dish)
+        public IActionResult Delete([FromBody] ModelMenu Dish)
         {
             var result = _service.DeleteDish(Dish);
             return StatusCode(result);
@@ -48,7 +46,7 @@ namespace RestaurantApp.Controllers.Implementation
 
         [HttpPost]
         [Route("AddDish")]
-        public ActionResult Post([FromBody] ModelMenu Dish)
+        public IActionResult Post([FromBody] ModelMenu Dish)
         {
             var result = _service.AddDish(Dish);
             return StatusCode(result);
@@ -57,7 +55,7 @@ namespace RestaurantApp.Controllers.Implementation
 
         [HttpPut]
         [Route("UpdateDish")]
-        public ActionResult Put([FromBody] ModelMenuToUpdate Dish)
+        public IActionResult Put([FromBody] ModelMenuToUpdate Dish)
         {
             var result = _service.UpdateDish(Dish);
             return StatusCode(result);

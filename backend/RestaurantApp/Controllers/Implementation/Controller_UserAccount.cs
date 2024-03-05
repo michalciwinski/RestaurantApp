@@ -12,11 +12,11 @@ namespace RestaurantApp.Controllers.Implementation
     public class Controller_UserAccount : ControllerBase, IController_UserAccount
     {
         private readonly IAccountService _service;
-        private readonly RestaurantDbContext _DB;
+        //private readonly RestaurantDbContext _DB;
 
         public Controller_UserAccount(IAccountService accountService)
         {
-            _DB = new RestaurantDbContext();
+            //_DB = new RestaurantDbContext();
             _service = accountService;
         }
 

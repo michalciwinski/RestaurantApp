@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.Services.Common;
 using RestaurantApp.Entities;
 
+
 namespace RestaurantApp.DBSeeder
 {
     public class SeederState
@@ -11,19 +12,19 @@ namespace RestaurantApp.DBSeeder
             _context = context;
         }
 
-        private IEnumerable<TState> GetTState()
+        private IEnumerable<Tstate> GetTState()
         {
-            var StateList = new List<TState>()
+            var StateList = new List<Tstate>()
             {
-                new TState()
+                new Tstate()
                 {
                     Name = "Preparing",
                 },
-                new TState()
+                new Tstate()
                 {
                     Name = "Done",
                 },
-                new TState()
+                new Tstate()
                 {
                     Name = "Received",
                 }
@@ -35,10 +36,10 @@ namespace RestaurantApp.DBSeeder
         {
             if (_context.Database.CanConnect())
             {
-                if (!_context.TState.Any())
+                if (!_context.Tstates.Any())
                 {
                     var State = GetTState();
-                    _context.TState.AddRange(State);
+                    _context.Tstates.AddRange(State);
                     _context.SaveChanges();
                 }
             }

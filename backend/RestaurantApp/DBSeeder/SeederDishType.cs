@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RestaurantApp.Entities;
-using System.Xml.Linq;
 
 namespace RestaurantApp.DBSeeder
 {
@@ -11,27 +10,27 @@ namespace RestaurantApp.DBSeeder
         {
             _context = context;
         }
-        private IEnumerable<TDishType> GetTDishType()
+        private IEnumerable<TdishType> GetTDishType()
         {
-            var DishTypeList = new List<TDishType>()
+            var DishTypeList = new List<TdishType>()
             {
-                new TDishType()
+                new TdishType()
                 {
                     Name = "Starter",
                 },
-                new TDishType()
+                new TdishType()
                 {
                     Name = "Soup",
                 },
-                new TDishType()
+                new TdishType()
                 {
                     Name = "Main course",
                 },
-                new TDishType()
+                new TdishType()
                 {
                     Name = "Dessert",
                 },
-                new TDishType()
+                new TdishType()
                 {
                     Name = "Drink",
                 }
@@ -44,10 +43,10 @@ namespace RestaurantApp.DBSeeder
         {
             if (_context.Database.CanConnect())
             {
-                if (!_context.TDishType.Any())
+                if (!_context.TdishTypes.Any())
                 {
                     var DishType = GetTDishType();
-                    _context.TDishType.AddRange(DishType);
+                    _context.TdishTypes.AddRange(DishType);
                     _context.SaveChanges();
                 }
             }
