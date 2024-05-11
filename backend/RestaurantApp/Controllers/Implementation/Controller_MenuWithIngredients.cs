@@ -9,7 +9,7 @@ using RestaurantApp.Services.Interface;
 namespace RestaurantApp.Controllers.Implementation
 {
     [ApiController]
-    [Route("[controller]/")]
+    [Route("api/Menu_Ingredients")]
     public class Controller_MenuWithIngredients : Controller, IController_MenuWithIngredients
     {
 
@@ -21,7 +21,6 @@ namespace RestaurantApp.Controllers.Implementation
 
         [HttpGet]
         [Route("GetDishesWithIngredients")]
-
         public IActionResult Get()
         {
             return _service.GetDishesWithIngr();

@@ -1,13 +1,15 @@
-﻿using RestaurantApp.Model;
+﻿using Microsoft.AspNetCore.Mvc;
+using RestaurantApp.Model;
 
 namespace RestaurantApp.Services.Interface
 {
     public interface IMenuService
     {
-        List<ModelMenu> GetDishes();
-        ModelMenu GetDish(int id);
-        int DeleteDish(ModelMenu Dish);
-        int AddDish(ModelMenu Dish);
-        int UpdateDish(ModelMenuToUpdate Dish);
+        IActionResult GetDishes();
+        IActionResult GetDish(int id);
+        IActionResult GetIngredientsOfDish(int id);
+        IActionResult DeleteDish(int id);
+        IActionResult AddDish(ModelMenuWithPicture Dish, ModelListOfIngredients Ingredients);
+        IActionResult UpdateDish(ModelMenuToUpdate Dish);
     }
 }

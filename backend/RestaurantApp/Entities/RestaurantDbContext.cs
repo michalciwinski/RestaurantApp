@@ -43,7 +43,6 @@ public partial class RestaurantDbContext : DbContext
 
     public virtual DbSet<TvMenuPricesDishType> TvMenuPricesDishTypes { get; set; }
 
-    //think to do it better by DI...
     IConfiguration config = new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: false, reloadOnChange: true).Build();
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseNpgsql(config["ConnectionStrings:EntitiesDB"]);
@@ -56,7 +55,7 @@ public partial class RestaurantDbContext : DbContext
 
             entity.ToTable("TcompositionPosition");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Id).HasIdentityOptions(31L, null, null, null, null, null);
             entity.Property(e => e.TingredientsId).HasColumnName("TIngredientsId");
             entity.Property(e => e.TmenuId).HasColumnName("TMenuId");
 
@@ -67,7 +66,6 @@ public partial class RestaurantDbContext : DbContext
 
             entity.HasOne(d => d.Tmenu).WithMany(p => p.TcompositionPositions)
                 .HasForeignKey(d => d.TmenuId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("TMenuId");
         });
 
@@ -87,7 +85,7 @@ public partial class RestaurantDbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("TIngredients_pkey");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Id).HasIdentityOptions(17L, null, null, null, null, null);
             entity.Property(e => e.NameOfIngredient).IsRequired();
         });
 
@@ -106,6 +104,9 @@ public partial class RestaurantDbContext : DbContext
             entity.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(25)
+                .HasDefaultValueSql("''::character varying");
+            entity.Property(e => e.SrcPict)
+                .HasMaxLength(100)
                 .HasDefaultValueSql("''::character varying");
             entity.Property(e => e.TdishTypeId).HasColumnName("TDishTypeId");
 

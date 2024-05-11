@@ -1,0 +1,61 @@
+#main-div{
+  background-color:white;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#button-div {
+  font-size: 18px; 
+  display: flex;
+  align-items: center;
+  margin: 3vh 0 4vh 0;
+}
+#text{
+  margin-right:3vw;
+}
+#create {
+  border: 2px solid black; 
+  border-radius: 10px; 
+  color: black; 
+  padding: 10px 20px; 
+  font-size: 16px; 
+
+}
+#create:hover {
+  background-color: #1677ff;
+}
+#create:focus {
+  outline: none; 
+}
+#create svg {
+  vertical-align: middle; 
+  margin-left: 5px; 
+}
+
+
+#admin-view-table{
+  width: 80%;
+  border-collapse: collapse;
+}
+
+
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #1677ff;
+  color: white;
+}
+
+tr {
+  background-color: #f2f2f2; 
+}
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+

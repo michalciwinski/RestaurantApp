@@ -8,7 +8,7 @@ using RestaurantApp.Services.Interface;
 
 namespace RestaurantApp.Controllers.Implementation
 {
-    [Route("[controller]")]
+    [Route("api/Order")]
     [ApiController]
     public class Controller_Order : ControllerBase, IController_Order
     {

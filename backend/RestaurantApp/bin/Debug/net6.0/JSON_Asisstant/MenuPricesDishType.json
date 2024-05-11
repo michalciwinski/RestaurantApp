@@ -30,8 +30,20 @@
     "Dishtype": "Soup"
   },
   {
+    "Name": "Szarlotka",
+    "Description": "Placek jableczny z bita śmietana",
+    "Price": 12,
+    "Dishtype": "Dessert"
+  },
+  {
     "Name": "Burger Drwala",
     "Description": "Burger wołowy z oscypkiem,  w zestawie frytki",
     "Price": 38.5,
     "Dishtype": "Main course"
+  },
+  {
+    "Name": "Łoscypek",
+    "Description": "Tradycyjny górlaski przysmak na ciepło",
+    "Price": 8,
+    "Dishtype": "Starter"
   }

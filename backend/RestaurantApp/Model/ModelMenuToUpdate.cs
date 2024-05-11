@@ -6,10 +6,7 @@
         public string Name { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
-        public int Type { get; set; }
-        public string NewName { get; set; }
-        public string NewDescription { get; set; }
-        public double NewPrice { get; set; }
-        public string NewType { get; set; }
+        public int DishType { get; set; }
+        public Dictionary<int,string> Ingredients { get; set; }
     }
 }

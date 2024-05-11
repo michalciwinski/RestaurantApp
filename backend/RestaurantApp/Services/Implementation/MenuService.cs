@@ -1,176 +1,291 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
+using OpenAI;
+using OpenAI.Images;
 using RestaurantApp.Controllers;
 using RestaurantApp.Entities;
+using RestaurantApp.Exceptions;
 using RestaurantApp.Model;
 using RestaurantApp.Services.Interface;
+using System.IO;
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
 
+
 namespace RestaurantApp.Services.Implementation
 {
-    public class MenuService : IMenuService
+    public class MenuService : ControllerBase, IMenuService
     {
         private RestaurantDbContext _context;
-        public MenuService(RestaurantDbContext context)
+        private IWebHostEnvironment _hostEnvironment;
+        public MenuService(RestaurantDbContext context, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
+            _hostEnvironment = hostEnvironment;
         }
 
-        public List<ModelMenu> GetDishes()
+        public IActionResult GetDishes()
         {
             List<ModelMenu> dishes = new List<ModelMenu>();
-            var dishesList = _context.Tmenus.Include(e => e.TdishType)
-                                           .OrderBy(e => e.TdishTypeId)
-                                           .ToList();
-            dishesList.ForEach(row => dishes.Add(new ModelMenu()
+            try
             {
-                Id = row.Id,
-                Name = row.Name,
-                Description = row.Description,
-                Price = row.Price,
-                DishType = row.TdishType.Name,
-            }));
-            return dishes;
+                var dishesList = _context.Tmenus.Include(e => e.TdishType)
+                                               .OrderBy(e => e.TdishTypeId)
+                                               .ToList();
+                dishesList.ForEach(row => dishes.Add(new ModelMenu()
+                {
+                    Id = row.Id,
+                    Name = row.Name,
+                    Description = row.Description,
+                    Price = row.Price,
+                    DishType = row.TdishType.Name,
+                    SrcPic = row.SrcPict
+                }));
+                return Ok(dishes);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Can't download information from database");
+            }
         }
-        //TO DO - else..
-        public ModelMenu GetDish(int id)
+
+        public IActionResult GetDish(int id)
         {
-            var record = _context.Tmenus.Include(e => e.TdishType)
-                                        .FirstOrDefault(e => e.Id == id);
-            if (record != null)
+            try
             {
+                var record = _context.Tmenus.Include(e => e.TdishType)
+                                        .FirstOrDefault(e => e.Id == id);
                 ModelMenu dish = new ModelMenu
                 {
                     Id = record.Id,
                     Name = record.Name,
                     Description = record.Description,
                     Price = record.Price,
-                    DishType = record.TdishType.Name
+                    DishType = record.TdishType.Name,
+                    SrcPic = record.SrcPict
                 };
-                return dish;
+                return Ok(dish);
             }
-            else
+            catch (Exception ex)
             {
-                ModelMenu dish = new ModelMenu
-                {
-                    Id = 0,
-                    Name = "empty",
-                    Description = "empty",
-                    Price = 0,
-                    DishType = "empty",
-                };
-                return dish;
+                return BadRequest("Can't download information from database");
             }
-
 
         }
 
-        public int DeleteDish(ModelMenu Dish)
+        public IActionResult GetIngredientsOfDish(int id)
         {
-            var recordToDelete = _context.Tmenus.Where(d => d.Name.Equals(Dish.Name) &&
-                                    d.Description.Equals(Dish.Description) &&
-                                    d.Price.Equals(Dish.Price)).FirstOrDefault();
-            if (recordToDelete != null)
+            try
             {
-                _context.Tmenus.Remove(recordToDelete);
-                _context.SaveChanges();
-                return 200;
+                var dishesList = _context.TvMenuIngredients.Where(c => c.Id == id).Select(c => c.NameOfIngredient).ToList();
+                return Ok(dishesList);
             }
-            else
+            catch (Exception ex)
             {
-                return 404;//not found in db
+                return BadRequest("Can't download information from database");
+            }
+
+        }
+
+        public IActionResult DeleteDish(int id)
+        {
+            try
+            {
+                /*var menuToDelete = _context.Tmenus.Include(e => e.TdishType)
+                                        .FirstOrDefault(e => e.Id == id);
+                _context.Tmenus.Remove(menuToDelete);
+                _context.SaveChanges();
+
+
+                var ingredientsToDelete = _context.TcompositionPositions.Where(e => e.TmenuId.Equals(id)).ToList();
+                foreach(var el in ingredientsToDelete)
+                {
+                    _context.TcompositionPositions.Remove(el);
+                }
+                _context.SaveChanges();*/
+                using (var transaction = _context.Database.BeginTransaction())
+                {
+                        var menuToDelete = _context.Tmenus
+                                                   .Include(e => e.TcompositionPositions) // Dodanie includowania TcompositionPositions do pobranych Tmenus
+                                                   .FirstOrDefault(e => e.Id == id);
+                        if (menuToDelete != null)
+                        {
+                            _context.Tmenus.Remove(menuToDelete);
+                            _context.SaveChanges();
+                        }
+
+                        // Usunięcie powiązanych rekordów z TcompositionPositions
+                        var compositionPositionsToDelete = _context.TcompositionPositions
+                                                                   .Where(e => e.TmenuId == id)
+                                                                   .ToList();
+                        _context.TcompositionPositions.RemoveRange(compositionPositionsToDelete);
+                        _context.SaveChanges();
+
+                        string filePath = Path.Combine(_hostEnvironment.ContentRootPath, "Images", menuToDelete.Name + ".png");
+                        if (System.IO.File.Exists(filePath))
+                        {
+                            System.IO.File.Delete(filePath);
+                        }
+
+                        transaction.Commit();
+                    }
+
+                
+
+                /*string filePath = Path.Combine(_hostEnvironment.ContentRootPath, "Images", menuToDelete.Name + ".png");
+                if (System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                }*/
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Can't delete dish from database.");
             }
         }
 
-        public int AddDish(ModelMenu Dish)
+
+
+        public IActionResult AddDish(ModelMenuWithPicture Dish, ModelListOfIngredients Ingredients)
+        {
+        try
         {
             var checkDb = _context.Tmenus.Where(d => d.Name.Equals(Dish.Name) &&
-                                    d.Description.Equals(Dish.Description) &&
-                                    d.Price.Equals(Dish.Price)).FirstOrDefault();
-            if (checkDb != null)
+                                d.Description.Equals(Dish.Description) &&
+                                d.Price.Equals(Dish.Price)).FirstOrDefault();
+            if (checkDb != null) 
             {
-                return 409;// already exist in db
+                throw new BadRequestException("Record exist in database");
             }
-            else if (checkDb == null)
+
+            //prepare path,name
+            string imageName = Dish.Name + ".png";
+            var imagePath = Path.Combine(_hostEnvironment.ContentRootPath, "Images", imageName);
+            string forDbPath = "https://localhost:7197/Images/" + imageName;
+
+            //MENU TABLE
+            Tmenu DishTableDB = new Tmenu
+            {
+                Id = Dish.Id,
+                Name = Dish.Name,
+                Description = Dish.Description,
+                Price = Dish.Price,
+                TdishTypeId = Dish.DishType,
+                SrcPict = forDbPath
+            };
+            _context.Tmenus.Add(DishTableDB);
+            _context.SaveChanges();
+
+            //PICTURE DISH
+            using (var fileStream = new FileStream(imagePath, FileMode.Create))
+            {
+                Dish.ImageFile.CopyToAsync(fileStream);
+            }
+
+            //TAKE ID OF NEW CREATED DISH
+            var idMenuNew = _context.Tmenus.Where(d => d.Name.Equals(Dish.Name)).Select(c => c.Id).FirstOrDefault();
+
+            //INGREDIENTS TABLE
+            //check if we have got new ingredients - if yes, add them to table Tingredients
+            var newIngredients = new List<string>();
+            foreach (var el in Ingredients.Namee)
+            {
+                var tmp = _context.Tingredients.Where(d => d.NameOfIngredient.Equals(el)).Select(c => c.NameOfIngredient).ToList();
+                if (tmp.Count == 0)
+                {
+                    newIngredients.Add(el);
+                }
+
+            }
+
+            //ADD TO TABLE NEW INGREDIENTS - if exists new
+            foreach (var el in newIngredients)
+            {
+                Tingredient TingredientTable = new Tingredient
+                {
+                    Id = 0,//autoincrement
+                    NameOfIngredient = el
+                };
+                _context.Tingredients.Add(TingredientTable);
+            }
+            _context.SaveChanges();
+
+            //ADD TO TABLE TCOMPOSITIONPOSITION NEW RECORDS
+            foreach (var el in Ingredients.Namee)
+            {
+                var idIngredient = _context.Tingredients.Where(d => d.NameOfIngredient.Equals(el)).Select(c => c.Id).FirstOrDefault();
+                TcompositionPosition tcompositionPosition = new TcompositionPosition
+                {
+                    Id = 0,//autoincrement
+                    TmenuId = idMenuNew,
+                    TingredientsId = idIngredient
+                };
+                _context.TcompositionPositions.Add(tcompositionPosition);
+            }
+            _context.SaveChanges();
+            return Ok();
+
+        }
+        catch (Exception ex)
+        {
+            return BadRequest("Can't add dish to database");
+        }
+    }
+
+
+
+
+        public IActionResult UpdateDish(ModelMenuToUpdate Dish)
+        {
+        var recordToUpdate = _context.Tmenus.Where(d => d.Name.Equals(Dish.Name) &&
+                                d.Description.Equals(Dish.Description) &&
+                                d.Price.Equals(Dish.Price)).FirstOrDefault();
+
+        try
+        {
+            
+
+
+            /*if (Dish.NewName != "")
+            {
+                recordToUpdate.Name = Dish.NewName;
+            }
+            if (Dish.NewDescription != "")
+            {
+                recordToUpdate.Description = Dish.NewDescription;
+            }
+            if (Dish.NewPrice != 0)
+            {
+                recordToUpdate.Price = Dish.NewPrice;
+            }
+            if (Dish.NewType != "")
             {
                 int DishID;
-                if (Dish.DishType == "Starter")
+                if (Dish.NewType == "Starter")
                     DishID = 1;
-                else if (Dish.DishType == "Soup")
+                else if (Dish.NewType == "Soup")
                     DishID = 2;
-                else if (Dish.DishType == "Main course")
+                else if (Dish.NewType == "Main course")
                     DishID = 3;
-                else if (Dish.DishType == "Dessert")
+                else if (Dish.NewType == "Dessert")
                     DishID = 4;
-                else if (Dish.DishType == "Drink")
+                else if (Dish.NewType == "Drink")
                     DishID = 5;
                 else
                     DishID = 0;
-                Tmenu DishTableDB = new Tmenu
-                {
-                    Name = Dish.Name,
-                    Description = Dish.Description,
-                    Price = Dish.Price,
-                    TdishTypeId = DishID
-                };
-                _context.Tmenus.Add(DishTableDB);
-                _context.SaveChanges();
-                return 200;
+                recordToUpdate.TdishTypeId = DishID;
+            }*/
+            _context.SaveChanges();
+            return Ok();
+
             }
-            else
+            catch (Exception ex)
             {
-                return 404;//other problem
-            }
-
-        }
-
-        public int UpdateDish(ModelMenuToUpdate Dish)
-        {
-            var recordToUpdate = _context.Tmenus.Where(d => d.Name.Equals(Dish.Name) &&
-                                    d.Description.Equals(Dish.Description) &&
-                                    d.Price.Equals(Dish.Price)).FirstOrDefault();
-
-            try
-            {
-                if (Dish.NewName != "")
-                {
-                    recordToUpdate.Name = Dish.NewName;
-                }
-                if (Dish.NewDescription != "")
-                {
-                    recordToUpdate.Description = Dish.NewDescription;
-                }
-                if (Dish.NewPrice != 0)
-                {
-                    recordToUpdate.Price = Dish.NewPrice;
-                }
-                if (Dish.NewType != "")
-                {
-                    int DishID;
-                    if (Dish.NewType == "Starter")
-                        DishID = 1;
-                    else if (Dish.NewType == "Soup")
-                        DishID = 2;
-                    else if (Dish.NewType == "Main course")
-                        DishID = 3;
-                    else if (Dish.NewType == "Dessert")
-                        DishID = 4;
-                    else if (Dish.NewType == "Drink")
-                        DishID = 5;
-                    else
-                        DishID = 0;
-                    recordToUpdate.TdishTypeId = DishID;
-                }
-                _context.SaveChanges();
-                return 200;
-            }
-            catch
-            {
-
-
-                return 409;
+                return BadRequest("Can't add dish to database");
             }
 
 

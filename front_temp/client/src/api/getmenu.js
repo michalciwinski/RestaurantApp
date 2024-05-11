@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Menuposition from "../menuf/menutableposition";
-import menupositionstyle from '../menuf/menutableposition.module.css';
-import MenuFilter from "../menuf/filtermenubutton.js"
+import Menuposition from "../Tab_Menu/menutableposition";
+import menupositionstyle from '../Tab_Menu/menutableposition.module.css';
+import MenuFilter from "../Tab_Menu/filtermenubutton.js"
 
 const tableHeaderListStyle = menupositionstyle['tableheader-list'];
 const tableHeaderStyle = menupositionstyle['tableheader'];
@@ -15,7 +15,7 @@ class MenuList extends Component {
     
   
     componentDidMount() {
-      fetch("https://localhost:7197/Controller_Menu/GetDishes")
+      fetch("https://localhost:7197/api/Menu/GetDishes")
         .then((response) => response.json())
         .then((data) => {
           this.setState({ menuItems: data });

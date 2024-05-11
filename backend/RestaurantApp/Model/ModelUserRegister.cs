@@ -1,4 +1,6 @@
-﻿namespace RestaurantApp.Model
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace RestaurantApp.Model
 {
     public class ModelUserRegister
     {

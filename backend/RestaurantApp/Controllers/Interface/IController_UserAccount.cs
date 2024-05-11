@@ -5,7 +5,7 @@ namespace RestaurantApp.Controllers.Interface
 {
     public interface IController_UserAccount
     {
-        ActionResult Post(ModelUserRegister User);
-
+        ActionResult RegisterUser(ModelUserRegister User);
+        ActionResult LoginUser(ModelUserLogin User);
     }
 }

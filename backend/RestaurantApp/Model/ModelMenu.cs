@@ -10,6 +10,6 @@ namespace RestaurantApp.Model
         public string Description { get; set; } 
         public double Price { get; set; }
         public string DishType { get; set; }
-
+        public string SrcPic { get; set; }
     }
 }

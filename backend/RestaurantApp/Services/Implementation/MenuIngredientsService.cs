@@ -29,7 +29,7 @@ namespace RestaurantApp.Services.Implementation
                 {
                     var dish = new ModelMenuWithIngredients()
                     {
-                        Id = group.Key.Id,
+                        Id = group.Key.Id ?? 0,// ?? 0 to check
                         Name = group.Key.Name,
                         NameOfIngredients = group.Select(x => x.NameOfIngredient).ToList()
                     };
@@ -40,7 +40,7 @@ namespace RestaurantApp.Services.Implementation
             }
             catch (Exception ex)
             {
-                return BadRequest("Can't download infomartion from database");
+                return BadRequest("Can't download information from database");
             }
 
         }

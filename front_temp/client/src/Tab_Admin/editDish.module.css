@@ -1,0 +1,35 @@
+#edit-dish-div{
+    background-color:white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 3vh 0 4vh 0;
+}
+
+#edit-dish-border-container{
+    border: 1px solid #1677ff;
+    border-radius: 3px;
+    width: 40vw;
+    box-shadow: -15px 15px 15px rgba(0, 0, 0, 0.1);
+}
+
+#edit-dish-table{
+    border-spacing: 0;
+    width:40vw;
+}
+
+img#edit-picture-pict{
+    width:40vw;
+    height: auto;
+}
+
+#edit-button-confirm{
+    background-color: #1677ff;
+    color: #fff; 
+    padding: 8px 12px; 
+    border-radius: 5px; 
+    border: none; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease;
+    margin: 1vh 0 1vh 0;
+}

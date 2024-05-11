@@ -15,6 +15,8 @@ public partial class Tmenu
 
     public int TdishTypeId { get; set; }
 
+    public string SrcPict { get; set; }
+
     public virtual ICollection<TcompositionPosition> TcompositionPositions { get; set; } = new List<TcompositionPosition>();
 
     public virtual TdishType TdishType { get; set; }

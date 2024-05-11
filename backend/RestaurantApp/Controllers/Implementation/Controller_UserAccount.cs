@@ -7,24 +7,30 @@ using RestaurantApp.Services.Interface;
 
 namespace RestaurantApp.Controllers.Implementation
 {
-    [Route("[controller]")]
+    [Route("api/userAccount")]
     [ApiController]
     public class Controller_UserAccount : ControllerBase, IController_UserAccount
     {
         private readonly IAccountService _service;
-        //private readonly RestaurantDbContext _DB;
 
         public Controller_UserAccount(IAccountService accountService)
         {
-            //_DB = new RestaurantDbContext();
             _service = accountService;
         }
 
         [HttpPost]
-        [Route("RegisterUser")]
-        public ActionResult Post([FromBody] ModelUserRegister User)
+        [Route("register")]
+        public ActionResult RegisterUser([FromBody] ModelUserRegister User)
         {
             return _service.RegisterUser(User);
+        }
+
+        [HttpPost]
+        [Route("login")]
+        public ActionResult LoginUser([FromBody] ModelUserLogin User)
+        {
+            var json = _service.GenerateJWT(User);
+            return Ok(json);
         }
 
     }

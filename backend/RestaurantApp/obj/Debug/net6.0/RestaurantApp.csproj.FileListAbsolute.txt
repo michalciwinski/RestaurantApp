@@ -198,3 +198,12 @@ D:\AppRestaurant\backend\RestaurantApp\bin\Debug\net6.0\FluentValidation.Depende
 D:\AppRestaurant\backend\RestaurantApp\bin\Debug\net6.0\OpenAI-DotNet.dll
 D:\AppRestaurant\backend\RestaurantApp\bin\Debug\net6.0\JSON_Asisstant\MenuIngredients.json
 D:\AppRestaurant\backend\RestaurantApp\bin\Debug\net6.0\JSON_Asisstant\MenuPricesDishType.json
+D:\AppRestaurant\backend\RestaurantApp\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\AppRestaurant\backend\RestaurantApp\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+D:\AppRestaurant\backend\RestaurantApp\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\AppRestaurant\backend\RestaurantApp\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+D:\AppRestaurant\backend\RestaurantApp\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+D:\AppRestaurant\backend\RestaurantApp\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\AppRestaurant\backend\RestaurantApp\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+D:\AppRestaurant\backend\RestaurantApp\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+D:\AppRestaurant\backend\RestaurantApp\bin\Debug\net6.0\Images\Burger Drwala.png

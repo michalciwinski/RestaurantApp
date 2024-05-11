@@ -5,10 +5,11 @@ namespace RestaurantApp.Controllers.Interface
 {
     public interface IController_Menu 
     {
-        IEnumerable<ModelMenu> Get();
-        ModelMenu Get(int id);
-        IActionResult Delete(ModelMenu Dish);
-        IActionResult Post(ModelMenu Dish);
+        IActionResult Get();
+        IActionResult Get(int id);
+        IActionResult GetIngredientsOfDish(int id);
+        IActionResult Delete(int id);
+        IActionResult Post(ModelMenuWithPicture modelMenuWithPicture, ModelListOfIngredients modelListOfIngredients);
         IActionResult Put(ModelMenuToUpdate Dish);
 
 
