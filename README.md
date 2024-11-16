@@ -27,3 +27,8 @@ ADDITIONAL:
 ![image](https://github.com/user-attachments/assets/736fb38e-d2c3-497e-bea8-21f2f13050e2)
 ![image](https://github.com/user-attachments/assets/e683fea9-f835-4a18-ad5d-c3cf6e06614e)
 
+
+SQL Diagram ERD
+![image](https://github.com/user-attachments/assets/e0b1868e-fa6d-4fdf-8fe8-e1a70f9bf200)
+
+
