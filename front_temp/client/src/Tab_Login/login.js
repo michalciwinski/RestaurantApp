@@ -68,7 +68,7 @@ const Login = (props) => {
         <input
           value={password}
           type="password"
-          placeholder="Password"
+          placeholder="Hasło"
           onChange={(ev) => setPassword(ev.target.value)}
           className={styles['inputBox']}
         />
@@ -76,7 +76,7 @@ const Login = (props) => {
       </div>
       <br />
       <div className={styles['inputContainer']}>
-        <input className={styles['inputButton']} type="button" onClick={onButtonClick} value={'Log in'} />
+        <input className={styles['inputButton']} type="button" onClick={onButtonClick} value={'Zaloguj'} />
       </div>
     </div>
   )

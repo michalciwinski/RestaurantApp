@@ -8,6 +8,7 @@ using OpenAI.Files;
 using static Microsoft.VisualStudio.Services.Graph.GraphResourceIds;
 using RestaurantApp.Model;
 using System.Text.Json;
+using System.Net.Http.Headers;
 
 namespace RestaurantApp.Services.Implementation
 {
@@ -38,13 +39,15 @@ namespace RestaurantApp.Services.Implementation
                 conn.Notification += async (sender, e) =>
                 {
                     Console.WriteLine($"Received: {e.Payload}");
-                    await openAiFunctions();
-
+                    if (e.Payload == "menu")
+                    {
+                        await openAiFunctions();
+                    }
                 };
 
                 while (!stoppingToken.IsCancellationRequested)
                 {
-                    await conn.WaitAsync(stoppingToken); // Nasłuchuje na powiadomienia
+                    await conn.WaitAsync(stoppingToken);
                 }
             }
         }
@@ -54,7 +57,7 @@ namespace RestaurantApp.Services.Implementation
             const string file1 = "JSON_Asisstant/MenuIngredients.json";
             const string file2 = "JSON_Asisstant/MenuPricesDishType.json";
 
-
+            
             //Connect to Open AI
             using var api = new OpenAIClient("sk-" + _openAIClient);
 
@@ -64,13 +67,17 @@ namespace RestaurantApp.Services.Implementation
             //Take a list of exisitng files in assistant
             var filesList = await api.AssistantsEndpoint.ListFilesAsync(_assistantsEndpoint);
 
+            foreach (var file in filesList.Items)
+            {
+                Console.WriteLine($"Plik ID: {file.Id}");
+            }
             //Delete old files from Open AI DB
             var tasks = new List<Task>();
             foreach (var file in filesList.Items)
             {
                 tasks.Add(assistant.DeleteFileAsync(file.Id));
             }
-            await Task.WhenAll(tasks);
+            //*await Task.WhenAll(tasks);
 
             //Take view from DB
             List<ModelMenuWithIngredients> menuIngredients = new List<ModelMenuWithIngredients>();
@@ -145,7 +152,7 @@ namespace RestaurantApp.Services.Implementation
                 async Task UploadAndAttachAsync(string file)
                 {
                     var fileUploadRequest = new FileUploadRequest(file, "assistants");
-                    var file_ = await api.FilesEndpoint.UploadFileAsync(fileUploadRequest);
+                    var file_ = await api.FilesEndpoint.UploadFileAsync(fileUploadRequest); 
                     await assistant.AttachFileAsync(file_);
                 }
                 filesUploadTasks.Add(UploadAndAttachAsync(fileUpload));

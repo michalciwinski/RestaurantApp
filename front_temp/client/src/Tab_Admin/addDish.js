@@ -47,7 +47,7 @@ const AddDish = () => {
     const handleSubmit = async (e) => {
 
         if (values.Price === "" || values.Name === "" || values.Description === "" || values.ImageFile === null) {
-            alert("wrong inputs");
+            alert("Złe dane");
             return;
         }
         const newDish = new FormData();
@@ -66,12 +66,12 @@ const AddDish = () => {
         try {
         const response = await endpointsService.addDish(newDish);
         if (response.status === 200) {
-            window.confirm("Dish added succesfully")
+            window.confirm("Danie dodane poprawnie")
         }
         //return response;
         } catch (error) {
             console.error('Error:', error);
-            window.confirm("Failed to add item")
+            window.confirm("Problem z dodaniem")
         }
 
         window.location.reload();
@@ -107,31 +107,31 @@ const AddDish = () => {
             <table id={styles['single-dish-table']}>
             <tbody>
                 <tr>
-                    <td>Name</td>
-                    <td><input type="text" name='Name' placeholder="Enter name" onChange={handleChange}/></td>
+                    <td>Nazwa</td>
+                    <td><input type="text" name='Name' placeholder="Wpisz nazwe" onChange={handleChange}/></td>
                 </tr>
                 <tr>
-                    <td>Description</td>
-                    <td><input type="text" name='Description' placeholder="Enter description" onChange={handleChange}/></td>
+                    <td>Opis</td>
+                    <td><input type="text" name='Description' placeholder="Wpisz opis" onChange={handleChange}/></td>
                 </tr>
                 <tr>
-                    <td>Dish type</td>
+                    <td>Rodzaj dania</td>
                     <td>
                         <select name='DishType' className={styles['dish-type-select-class']} onChange={handleChange}>
                         <option value="1">Starter</option>
-                        <option value="2">Soup</option>
-                        <option value="3">Main course</option>
-                        <option value="4">Dessert</option>
-                        <option value="5">Drink</option>
+                        <option value="2">Zupa</option>
+                        <option value="3">Danie Główne</option>
+                        <option value="4">Deser</option>
+                        <option value="5">Napoje</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
-                    <td>Price</td>
-                    <td><input type="number" name='Price' placeholder="Enter price" onChange={handleChange}/></td>
+                    <td>Cena</td>
+                    <td><input type="number" name='Price' placeholder="Wpisz cene" onChange={handleChange}/></td>
                 </tr>
                 <tr>
-                    <td>Ingredients</td>
+                    <td>Składniki</td>
                     <td>
                         {inputFields.map((input, index) => {
                         return (
@@ -139,19 +139,19 @@ const AddDish = () => {
                                     <input
                                         name='ingredients'
                                         className="ingredients"
-                                        placeholder='Ingredient'
+                                        placeholder='Składnik'
                                         value={input.ingredients}
                                         onChange={event => handleFormChange(index, event)}
                                     />
-                                    <button onClick={() => removeFields(index)}>Remove</button>
+                                    <button onClick={() => removeFields(index)}>Usuń</button>
                                 </div>
                         )
                         })}
-                        <button onClick={addFields}>Add More..</button>
+                        <button onClick={addFields}>Dodaj więcej..</button>
                     </td>
                 </tr>
                 <tr>
-                    <td>Image</td>
+                    <td>Zdjęcie</td>
                     <td>
                         <input type="file" accept="image/*" onChange={showPreview}/>
                     </td>
@@ -160,7 +160,7 @@ const AddDish = () => {
             </table>
 
             <button id={styles['button-add']} onClick={handleSubmit}> 
-                <FaSave /> Save
+                <FaSave /> Zapisz
             </button>
 
         </div>

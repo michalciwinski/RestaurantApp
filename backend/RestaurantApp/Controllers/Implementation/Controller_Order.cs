@@ -13,21 +13,18 @@ namespace RestaurantApp.Controllers.Implementation
     public class Controller_Order : ControllerBase, IController_Order
     {
         private readonly IOrderService _service;
-        //private readonly RestaurantDbContext _DB;
 
         public Controller_Order(IOrderService orderService)
         {
-            //_DB = new RestaurantDbContext();
             _service = orderService;
         }
 
         [HttpPost]
         [Route("AddOrder")]
-        public ActionResult Post([FromBody] ModelOrder order)
+        public IActionResult Post([FromBody] ModelOrder order)
         {
             var result = _service.AddOrder(order);
             return result;
-            //to do
         }
 
 

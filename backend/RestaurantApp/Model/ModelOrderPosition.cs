@@ -2,7 +2,6 @@
 {
     public class ModelOrderPosition
     {
-        public int MenuId { get; set; }
-        public int Ilosc { get; set; }
+        public int TMenuId { get; set; }
     }
 }

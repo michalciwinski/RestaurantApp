@@ -1,39 +1,33 @@
 
   {
-    "Name": "Zupa pomidorowa",
-    "Description": "Zupka pomidorowa na rosole z wczoraj.",
-    "Price": 12.5,
-    "Dishtype": "Soup"
+    "Name": "Lemoniada Cytrynowa",
+    "Description": "Orzeźwiająca lemoniada",
+    "Price": 15,
+    "Dishtype": "Drink"
   },
   {
-    "Name": "Rosół z kaczki",
-    "Description": "Rosół z kaczki.",
-    "Price": 12,
-    "Dishtype": "Soup"
-  },
-  {
-    "Name": "Spaghetti",
-    "Description": "Włoski makaron z sosem bolognese.",
-    "Price": 28,
+    "Name": "Burger Maestro",
+    "Description": "Wypasiony burger wołowy z frytkami i surówką",
+    "Price": 38,
     "Dishtype": "Main course"
   },
   {
-    "Name": "Capriociosa",
-    "Description": "Wloska pizza capriciosa z szynka.",
-    "Price": 25,
+    "Name": "Chleb Czosnkowy",
+    "Description": "Delikatna przystawka ",
+    "Price": 8,
+    "Dishtype": "Starter"
+  },
+  {
+    "Name": "Pizza Salami",
+    "Description": "Włoska pizza na cienkim cieście",
+    "Price": 32,
     "Dishtype": "Main course"
   },
   {
-    "Name": "Pomidorowa",
-    "Description": "Zupa pomidorowa na słodko.",
-    "Price": 12,
-    "Dishtype": "Soup"
-  },
-  {
-    "Name": "Szarlotka",
-    "Description": "Placek jableczny z bita śmietana",
-    "Price": 12,
-    "Dishtype": "Dessert"
+    "Name": "Pizza Amerykańska",
+    "Description": "Pizza w stylu amerykańskim",
+    "Price": 34,
+    "Dishtype": "Main course"
   },
   {
     "Name": "Burger Drwala",
@@ -42,8 +36,38 @@
     "Dishtype": "Main course"
   },
   {
-    "Name": "Łoscypek",
-    "Description": "Tradycyjny górlaski przysmak na ciepło",
-    "Price": 8,
+    "Name": "Pizza Neapolitana",
+    "Description": "Włoska pizza ",
+    "Price": 33,
+    "Dishtype": "Main course"
+  },
+  {
+    "Name": "Krem Cebulowy",
+    "Description": "Gęsty krem z cebuli z dodatkami",
+    "Price": 13,
+    "Dishtype": "Soup"
+  },
+  {
+    "Name": "Zupa Rybna",
+    "Description": "Zupa ze świeżych ryb z bałtyku",
+    "Price": 14,
+    "Dishtype": "Soup"
+  },
+  {
+    "Name": "Quesadilla",
+    "Description": "Serowa bomba kaloryczna",
+    "Price": 17,
     "Dishtype": "Starter"
+  },
+  {
+    "Name": "Choco",
+    "Description": "Czekoladowy deser dla smakoszy",
+    "Price": 14,
+    "Dishtype": "Dessert"
+  },
+  {
+    "Name": "Ciasto Borówkowe",
+    "Description": "Słodka rozkosz borówkowa",
+    "Price": 15,
+    "Dishtype": "Dessert"
   }

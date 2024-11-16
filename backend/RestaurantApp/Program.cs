@@ -86,12 +86,11 @@ _SeederState.Seeder();
 _SeederMenu.Seeder();
 
 
-//****************************************************************      UNCOMENT !!
-//********* !!!!!!!!!!!!!!!!!!!!!!!!!!!
-/*builder.Services.AddHostedService(provider =>
+
+builder.Services.AddHostedService(provider =>
 {
     return new DatabaseListenerService(config["ConnectionStrings:EntitiesDB"], config["OpenAIClient"], config["AssistantsEndpoint"], _DB);
-});*/
+});
 
 
 builder.Services.AddCors(options =>

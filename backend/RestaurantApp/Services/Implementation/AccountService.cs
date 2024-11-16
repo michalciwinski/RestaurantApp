@@ -69,8 +69,8 @@ namespace RestaurantApp.Services.Implementation
             //var hmac = new HMACSHA256();
             //var key = new SymmetricSecurityKey(hmac.Key);
             var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var expires = DateTime.Now.AddDays(_authenticationSettings.JwtExpireDay);
-
+            var expires = DateTime.Now.AddDays(1);
+            Console.WriteLine(expires);
             var token = new JwtSecurityToken(_authenticationSettings.JwtIssuer, _authenticationSettings.JwtIssuer, claims, expires: expires, signingCredentials: cred);
             var tokenHandler = new JwtSecurityTokenHandler();
 

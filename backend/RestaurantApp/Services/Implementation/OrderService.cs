@@ -18,33 +18,46 @@ namespace RestaurantApp.Services.Implementation
             _context = context;
         }
 
-        public ActionResult AddOrder(ModelOrder Order)
+        public IActionResult AddOrder(ModelOrder modelOrder)
         {
-            if (Order == null)
+            using (var transaction = _context.Database.BeginTransaction())
             {
-                return BadRequest();
-            }
-            Torder neworder = new Torder
-            {
-                DateOfOrder = Order.DateOfOrder,
-                Bill = Order.Bill,
-                AdditionalComment = Order.AdditionalComment,
-                TstateId = Order.StateId,
-            };
+                try
+                {
+                    var newOrder = new Torder
+                    {
+                        DateOfOrder = modelOrder.DateOfOrder,
+                        Bill = modelOrder.Bill,
+                        AdditionalComment = modelOrder.AdditionalComment,
+                        TuserId = 1, // TO DO oter ID of User if he/she is logged in
+                        TstateId = modelOrder.StateId
+                    };
 
-             _context.Torders.Add(neworder);
-             _context.SaveChanges();
+                    _context.Torders.Add(newOrder);
+                    _context.SaveChanges();
 
-            try
-            {
-               // _context.TUser.Add(newUser);
-                _context.SaveChanges();
-                return Ok();
+                    foreach (var modelOrderPosition in modelOrder.OrderPositions)
+                    {
+                        var newOrderPosition = new TorderPosition
+                        {
+                            TorderId = newOrder.Id, //id of new order
+                            TmenuId = modelOrderPosition.TMenuId
+                        };
+
+                        _context.TorderPositions.Add(newOrderPosition);
+                    }
+
+                    _context.SaveChanges();
+                    transaction.Commit();
+                    return new OkObjectResult(new { message = "Order added successfully" });
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+                }
             }
-            catch (Exception ex)
-            {
-                return BadRequest("error with adding order to database");
-            }
+            
         }
 
     }

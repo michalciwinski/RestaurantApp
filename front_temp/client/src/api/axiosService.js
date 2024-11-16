@@ -51,6 +51,15 @@ class endpointsService {
     }
     return axios.put(`/Menu/UpdateDish`, data, config);
   }
+  
+  async addOrder(data) {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    return axios.post('/Order/AddOrder', data, config);
+  }
 
   //ACCOUNT HANDLING
   async register(data) {
@@ -66,6 +75,7 @@ class endpointsService {
     }
     return axios.post("/userAccount/login", data, config);
   }
+
 
 }
 

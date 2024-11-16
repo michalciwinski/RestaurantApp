@@ -11,6 +11,7 @@ import ShowDish from "../Tab_Admin/showDish";
 import AddDish from "../Tab_Admin/addDish";
 import AccessDeniedAdmin from "./accessDenied";
 import { useEffect, useState } from 'react';
+import Cart from "../Tab_Cart/Cart";
 
 export default function NavigationTemplate() {
   const [loggedIn, setLoggedIn] = useState(false)
@@ -45,23 +46,25 @@ export default function NavigationTemplate() {
         <nav className={styles.nav}>
           <ul className={styles.ull1}>
             <li className={styles.lii}><Link to="/Tab_Menu/menu">Menu</Link></li>
-            <li className={styles.lii}><Link to="/Tab_Voice/voicesite">Voice</Link></li>
+            <li className={styles.lii}><Link to="/Tab_Voice/voicesite">Robot</Link></li>
+            <li className={styles.lii}><Link to="/Tab_Cart/Cart">Koszyk</Link></li>
             {loggedIn && userRole === 'Admin' ? <li className={styles.lii}><Link to="/Tab_Admin/table">Admin</Link></li> : null  }
           </ul>
           <ul className={styles.ull2}>
-            {!loggedIn ? <li className={styles.lii}><Link to="/Tab_Register/register">Register</Link></li> : null}
-            {!loggedIn ? <li className={styles.lii}><Link to="/Tab_Login/login">Login</Link></li> : null}
-            {loggedIn ? <li className={styles.lii}><button className={styles.buttonLogout} onClick={() => handleLogout()}>Logout</button></li> : null  }
+            {!loggedIn ? <li className={styles.lii}><Link to="/Tab_Register/register">Rejestracja</Link></li> : null}
+            {!loggedIn ? <li className={styles.lii}><Link to="/Tab_Login/login">Logowanie</Link></li> : null}
+            {loggedIn ? <li className={styles.lii}><button className={styles.buttonLogout} onClick={() => handleLogout()}>Wyloguj</button></li> : null  }
           </ul>
         </nav>
 
         <Routes>
           <Route path="/Tab_Menu/menu" element={<Menu />} />
           <Route path="/Tab_Voice/voicesite" element={<VoiceSite />} />
+          <Route path="/Tab_Cart/Cart" element={<Cart />} />
           <Route path="/Tab_Admin/table" element={loggedIn && userRole === 'Admin' ? <AdminView /> : <AccessDeniedAdmin/>} />
 
-          <Route path="/Tab_Register/register" element={!loggedIn ? <Register /> : <p>Access is denied - You are logged in</p>} />
-          <Route path="/Tab_Login/login" element={!loggedIn ? <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn}/> : <p>Access is denied - You are logged in</p>} />
+          <Route path="/Tab_Register/register" element={!loggedIn ? <Register /> : <p>Dostęp zabroniony</p>} />
+          <Route path="/Tab_Login/login" element={!loggedIn ? <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn}/> : <p>Dostęp zabroniony</p>} />
 
           <Route path="/Tab_Admin/getDish/:id" element={loggedIn && userRole === 'Admin' ? <ShowDish /> : <AccessDeniedAdmin/>} />
           <Route path="/Tab_Admin/editDish/:id" element={loggedIn && userRole === 'Admin' ? <EditDish userToken={userToken} setUserToken={setUserToken}/> : <AccessDeniedAdmin/>} />

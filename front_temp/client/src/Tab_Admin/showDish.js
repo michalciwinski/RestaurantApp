@@ -38,7 +38,27 @@ const EditDish = () => {
       });
   };
 
-  
+  let dishType;
+  switch (dish.dishType) {
+    case 'Starter':
+      dishType = 'Starter';
+      break;
+    case 'Main course':
+      dishType = 'Danie główne';
+      break;
+    case 'Soup':
+      dishType = 'Zupa';
+      break;
+    case 'Dessert':
+      dishType = 'Deser';
+      break;
+    case 'Drink':
+      dishType = 'Napój';
+      break;
+    default:
+      dishType = dish.dishType;
+      break;
+  }
 
   return (
     <div id={styles['single-dish-div']}>
@@ -47,23 +67,23 @@ const EditDish = () => {
         <table id={styles['single-dish-table']}>
           <tbody >
             <tr>
-              <td>Name:</td>
+              <td>Nazwa:</td>
               <td>{dish.name}</td>
             </tr>
             <tr>
-              <td>Description:</td>
+              <td>Opis:</td>
               <td>{dish.description}</td>
             </tr>
             <tr>
-              <td>Dish type:</td>
-              <td>{dish.dishType}</td>
+              <td>Rodzaj dania:</td>
+              <td>{dishType}</td>
             </tr>
             <tr>
-              <td>Price:</td>
-              <td>{dish.price}</td>
+              <td>Cena:</td>
+              <td>{dish.price} PLN</td>
             </tr>
             <tr>
-              <td>Ingredients:</td>
+              <td>Składniki:</td>
               <td>{dishIngredients.join(', ')}</td>
             </tr>
           </tbody>

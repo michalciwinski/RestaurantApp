@@ -5,6 +5,6 @@ namespace RestaurantApp.Services.Interface
 {
     public interface IOrderService
     {
-        ActionResult AddOrder(ModelOrder Order);
+        IActionResult AddOrder(ModelOrder Order);
     }
 }

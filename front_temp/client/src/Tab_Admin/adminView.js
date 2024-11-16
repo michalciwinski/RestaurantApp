@@ -14,18 +14,18 @@ export default function AddDish() {
   const handleDelete = async (id) => {
     setIsLoading(true);
     try {
-      const confirmed = window.confirm("Are you sure?");
+      const confirmed = window.confirm("Czy jestes pewny?");
       if (!confirmed) {
         return; 
       }
       const response = await endpointsService.deleteDish(id);
       if (response.status === 200) {
-        window.confirm("Dish deleted succesfully")
+        window.confirm("Usunięto poprawnie")
       }
       setDishes(dishes.filter((item) => item.id !== id));
     } catch (error) {
       setError(error.message);
-      window.confirm("Failed to delete item")
+      window.confirm("Blad podczas usuwania")
     } finally {
       window.location.reload();
       setIsLoading(false);
@@ -51,14 +51,14 @@ export default function AddDish() {
     
 
     if (dishes.length < 0) {
-      return <h1>no dishes found</h1>;
+      return <h1>Nie znaleziono dań</h1>;
     } else {
     return (
         <div id={styles['main-div']}>
               <div id={styles['button-div']}>
-                <div id = {styles['text']}>Create a new position</div>
+                <div id = {styles['text']}>Stwórz nową pozycje</div>
                 <Link to={`/Tab_Admin/addDish`} >
-                  <button id={styles['create']}>Create<FaPlus/>
+                  <button id={styles['create']}>Dodaj<FaPlus/>
                   </button>            
                 </Link>
 
@@ -67,21 +67,43 @@ export default function AddDish() {
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Dish type</th>
-                    <th>Price</th>
+                    <th>Nazwa</th>
+                    <th>Opis</th>
+                    <th>Rodzaj dania</th>
+                    <th>Cena</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
                   {dishes?.sort((a, b) => a.id - b.id).map((item, i) => {
+                    let dishType;
+                    switch (item.dishType) {
+                      case 'Starter':
+                        dishType = 'Starter';
+                        break;
+                      case 'Main course':
+                        dishType = 'Danie główne';
+                        break;
+                      case 'Soup':
+                        dishType = 'Zupa';
+                        break;
+                      case 'Dessert':
+                        dishType = 'Deser';
+                        break;
+                      case 'Drink':
+                        dishType = 'Napój';
+                        break;
+                      default:
+                        dishType = item.dishType;
+                        break;
+                    }
+
                     return (
                       <tr key={i}>
                         <td>{item.id}</td>
                         <td>{item.name}</td>
                         <td>{item.description}</td>
-                        <td>{item.dishType}</td>
+                        <td>{dishType}</td>
                         <td>{item.price}</td>
                         <td>
                           <Link to={`/Tab_Admin/editDish/${item.id}`} id={item.id} >

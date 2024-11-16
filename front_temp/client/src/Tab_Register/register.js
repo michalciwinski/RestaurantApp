@@ -56,13 +56,13 @@ const Register = () => {
     return (
         <div className={styles['mainContainer']}>
                 <div className={styles['titleContainer']}>
-                    <div>Register</div>
+                    <div>Rejestracja</div>
                 </div>
                 <br />
                 <div className={styles['inputContainer']}>
                     <input
                     value={firstName}
-                    placeholder="John"
+                    placeholder="Jan"
                     onChange={(ev) => setFirstName(ev.target.value)}
                     className={styles['inputBox']}
                     />
@@ -80,7 +80,7 @@ const Register = () => {
                 <div className={styles['inputContainer']}>
                     <input
                     value={email}
-                    placeholder="Email@example.com"
+                    placeholder="Email@przyklad.pl"
                     onChange={(ev) => setEmail(ev.target.value)}
                     className={styles['inputBox']}
                     />
@@ -91,7 +91,7 @@ const Register = () => {
                     <input
                     type="password"
                     value={password}
-                    placeholder="Password"
+                    placeholder="Haslo"
                     onChange={(ev) => setPassword(ev.target.value)}
                     className={styles['inputBox']}
                     />
@@ -99,7 +99,7 @@ const Register = () => {
                 </div>
                 <br />
                 <div className={styles['inputContainer']}>
-                    <input className={styles['inputButton']} type="button" onClick={onButtonClick} value={'Register'} />
+                    <input className={styles['inputButton']} type="button" onClick={onButtonClick} value={'Zarejestruj'} />
                 </div>
         </div>
     )

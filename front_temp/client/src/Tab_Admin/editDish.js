@@ -42,6 +42,28 @@ const EditDish = () => {
 
   };
 
+  let dishType;
+  switch (dish.dishType) {
+    case 'Starter':
+      dishType = 'Starter';
+      break;
+    case 'Main course':
+      dishType = 'Danie główne';
+      break;
+    case 'Soup':
+      dishType = 'Zupa';
+      break;
+    case 'Dessert':
+      dishType = 'Deser';
+      break;
+    case 'Drink':
+      dishType = 'Napój';
+      break;
+    default:
+      dishType = dish.dishType;
+      break;
+  }
+
   return (
     <div id={styles['edit-dish-div']}>
       <div id={styles['edit-dish-border-container']}>
@@ -51,7 +73,7 @@ const EditDish = () => {
           <tr>
             <td>
               <label for="name">
-                Name:
+                Nazwa:
               </label>
             </td>
             <td>
@@ -61,7 +83,7 @@ const EditDish = () => {
           <tr>
             <td>
               <label for="description">
-                Description:
+                Opis:
               </label>
             </td>
             <td>
@@ -71,17 +93,17 @@ const EditDish = () => {
           <tr>
             <td>
               <label for="dishType">
-                Dish Type:
+                Rodzaj dania:
               </label>
             </td>
             <td>
-              <input type="text" name="dishType" value={dish.dishType} onChange={handleChange}/>
+              <input type="text" name="dishType" value={dishType} onChange={handleChange}/>
             </td>
           </tr>
           <tr>
             <td>
               <label for="price">
-                Price
+                Cena:
               </label>
             </td>
             <td>
@@ -91,7 +113,7 @@ const EditDish = () => {
           <tr>
             <td>
               <label for="price">
-                Ingredients:
+                Składniki:
               </label>
             </td>
             <td>
@@ -102,7 +124,7 @@ const EditDish = () => {
       </table>
       <img src={dish.srcPic} alt={dish.Name} id={styles['edit-picture-pict']}/> {/* Picture is not able to change. we have to delete record and add new one*/}
       <button id={styles['edit-button-confirm']} onClick={handleSubmit}> 
-          <FaSave /> Confirm
+          <FaSave /> Potwierdź
       </button>
       </div>
     </div>

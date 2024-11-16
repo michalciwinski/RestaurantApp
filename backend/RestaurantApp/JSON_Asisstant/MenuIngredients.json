@@ -3,62 +3,124 @@
     "Id": 1,
     "Name": "Burger Drwala",
     "NameOfIngredients": [
-      "Bułka pszenna",
       "Ser oscypek",
       "Frytki z ziemniaków",
       "Mięso wołowe",
-      "Cebula",
-      "Olej"
-    ]
-  },
-  {
-    "Id": 2,
-    "Name": "Zupa pomidorowa",
-    "NameOfIngredients": [
-      "Bulion",
-      "Koncentrat pomidorowy",
-      "Mięso z kaczki",
-      "Czosnek",
-      "Makaron z mąki pszennej"
-    ]
-  },
-  {
-    "Id": 3,
-    "Name": "Rosół z kaczki",
-    "NameOfIngredients": [
-      "Bulion",
-      "Mięso z kaczki",
-      "Makaron z mąki pszennej"
-    ]
-  },
-  {
-    "Id": 4,
-    "Name": "Spaghetti",
-    "NameOfIngredients": [
-      "Koncentrat pomidorowy",
-      "Makaron z mąki pszennej",
-      "Pomidory w kawałkach",
-      "Czosnek",
-      "Cebula",
-      "Mięso wołowe"
-    ]
-  },
-  {
-    "Id": 5,
-    "Name": "Capriociosa",
-    "NameOfIngredients": [
-      "Koncentrat pomidorowy",
       "Olej",
-      "Szynka",
-      "Pieczarki"
+      "Cebula",
+      "Bułka pszenna"
     ]
   },
   {
-    "Id": 6,
-    "Name": "Pomidorowa",
+    "Id": 82,
+    "Name": "Burger Maestro",
     "NameOfIngredients": [
-      "Makaron z mąki pszennej",
-      "Pomidory w kawałkach",
-      "Mleko"
+      "Frytki z ziemniaków",
+      "Mięso wołowe",
+      "Cebula",
+      "Bułka pszenna",
+      "Majonez",
+      "Sałata",
+      "Pomidor",
+      "Ser żółty"
+    ]
+  },
+  {
+    "Id": 89,
+    "Name": "Zupa Rybna",
+    "NameOfIngredients": [
+      "Bulion",
+      "Mleko",
+      "Ryby"
+    ]
+  },
+  {
+    "Id": 86,
+    "Name": "Pizza Neapolitana",
+    "NameOfIngredients": [
+      "Koncentrat pomidorowy",
+      "Oliwa",
+      "Mozzarella",
+      "Bazylia"
+    ]
+  },
+  {
+    "Id": 85,
+    "Name": "Pizza Amerykańska",
+    "NameOfIngredients": [
+      "Koncentrat pomidorowy",
+      "Szynka",
+      "Cebula",
+      "Ser żółty",
+      "Kurczak"
+    ]
+  },
+  {
+    "Id": 84,
+    "Name": "Pizza Salami",
+    "NameOfIngredients": [
+      "Koncentrat pomidorowy",
+      "Ser żółty",
+      "Oliwa",
+      "Salami"
+    ]
+  },
+  {
+    "Id": 83,
+    "Name": "Chleb Czosnkowy",
+    "NameOfIngredients": [
+      "Czosnek",
+      "Bułka pszenna",
+      "Oliwa"
+    ]
+  },
+  {
+    "Id": 94,
+    "Name": "Ciasto Borówkowe",
+    "NameOfIngredients": [
+      "Mleko",
+      "Borówki",
+      "Mąka pszenna",
+      "Jajka",
+      "Cukier"
+    ]
+  },
+  {
+    "Id": 93,
+    "Name": "Choco",
+    "NameOfIngredients": [
+      "Mleko",
+      "Mąka pszenna",
+      "Kakao",
+      "Jajka"
+    ]
+  },
+  {
+    "Id": 88,
+    "Name": "Krem Cebulowy",
+    "NameOfIngredients": [
+      "Mleko",
+      "Cebula",
+      "Sól"
+    ]
+  },
+  {
+    "Id": 90,
+    "Name": "Quesadilla",
+    "NameOfIngredients": [
+      "Szynka",
+      "Ser żółty",
+      "Tortilla",
+      "Sos pomidorowy"
+    ]
+  },
+  {
+    "Id": 117,
+    "Name": "Lemoniada Cytrynowa",
+    "NameOfIngredients": [
+      "Cytryna",
+      "Mięta",
+      "Lód",
+      "Woda"
     ]
   }

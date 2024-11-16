@@ -1,25 +1,34 @@
 import React, { useState, useEffect } from "react";
 
-const TextToSpeech = ({readyToSpeak, cardText }) => {
-  const [isPaused, setIsPaused] = useState(false);
+const TextToSpeech = ({ cardText }) => {
   const [utterance, setUtterance] = useState(null);
-  
+  const [voices, setVoices] = useState([]);
 
   useEffect(() => {
     const synth = window.speechSynthesis;
-    const u = new SpeechSynthesisUtterance();
 
-    setUtterance(u);
+    const loadVoices = () => {
+      const voices = synth.getVoices();
+      setVoices(voices);
+    };
+
+    if (synth.onvoiceschanged !== undefined) {
+      synth.onvoiceschanged = loadVoices;
+    } else {
+      loadVoices();
+    }
+
+    const u = new SpeechSynthesisUtterance();
+    u.lang = 'pl-PL'; // set the language to Polish
 
     const handleEnd = () => {
-      // Clear the content of the 'transcription' element after speaking
-   //   const transcriptionElement = document.getElementById('transcription');
-//      if (transcriptionElement) {
-//        transcriptionElement.textContent = '';
-//      }
-
+      u.text = '';
     };
+
     u.addEventListener("end", handleEnd);
+    setUtterance(u);
+
+
     return () => {
       synth.cancel();
       u.removeEventListener("end", handleEnd);
@@ -27,61 +36,95 @@ const TextToSpeech = ({readyToSpeak, cardText }) => {
   }, []);
 
   useEffect(() => {
-    console.log(readyToSpeak);
-    if (readyToSpeak) {
-      console.log('2');
+    if (cardText && utterance) {
+      const voice = voices.find(voice => voice.lang === 'pl-PL');
+      if (voice) {
+        utterance.voice = voice;
+      }
       handlePlay();
-      console.log('end');
     }
-  }, [readyToSpeak]);
+  }, [cardText, utterance, voices]);
+
+  /*const handlePlay = () => {
+    const synth = window.speechSynthesis; 
+    if (synth.speaking) {
+      synth.cancel();
+    }
+
+    utterance.text = cardText;
+    synth.speak(utterance);
+  };*/
 
   const handlePlay = () => {
     const synth = window.speechSynthesis;
-    //const transcriptionElement = document.getElementsByClassName('ant-card-body');
-    const transcriptionElement = cardText;
-    //const newText = transcriptionElement ? transcriptionElement.textContent : '';
-    const newText = transcriptionElement ? transcriptionElement : '';
+    if (synth.speaking) {
+      synth.cancel();
+    }
 
-    utterance.text = newText;
+    // clean up the text by removing the unwanted pattern
+    const cleanedText = cardText.replace(/【\d+†source】/g, '');
+    console.log("Cleaned Text:", cleanedText);
 
-    if (isPaused) {
+    // split the text into sentences using multiple delimiters (e.g., periods, colons)
+    const sentences = cleanedText.split(/[.-]/).map(sentence => sentence.trim()).filter(sentence => sentence.length > 0);
+
+    const playSentence = (index) => {
+      if (index < sentences.length) {
+        const sentenceUtterance = new SpeechSynthesisUtterance(sentences[index]);
+        const voice = voices.find(voice => voice.lang === 'pl-PL');
+        if (voice) {
+          sentenceUtterance.voice = voice;
+        }
+        sentenceUtterance.lang = 'pl-PL';
+        sentenceUtterance.onend = () => {
+          console.log(`Finished sentence ${index + 1}/${sentences.length}`);
+          playSentence(index + 1);
+        };
+        sentenceUtterance.onerror = (e) => {
+          console.error("Speech synthesis error:", e);
+        };
+        console.log(`Speaking sentence ${index + 1}/${sentences.length}:`, sentences[index]);
+        synth.speak(sentenceUtterance);
+      }
+    };
+
+    playSentence(0);
+  };
+
+
+
+
+
+  const handlePause = () => {//not used
+    const synth = window.speechSynthesis;
+    if (synth.speaking) {
+      synth.pause();
+    }
+  };
+
+  const handleResume = () => {//not used
+    const synth = window.speechSynthesis;
+    if (synth.paused) {
       synth.resume();
     }
-    synth.speak(utterance);
-    if (transcriptionElement) {
-      //transcriptionElement.textContent = '';
-      //setCardText("");
+  };
+
+  const handleStop = () => {//not used
+    const synth = window.speechSynthesis;
+    if (synth.speaking || synth.paused) {
+      synth.cancel();
     }
-    setIsPaused(true);
-  };
-
-  const handlePause = () => {
-    const synth = window.speechSynthesis;
-    synth.pause();
-    setIsPaused(true);
-  };
-
-  const handleStop = () => {
-    const synth = window.speechSynthesis;
-    synth.cancel();
-    setIsPaused(false);
   };
 
   return (
     <div>
-      
+      {/*<button onClick={handlePlay}>Play</button>
+      <button onClick={handlePause}>Pause</button>
+      <button onClick={handleResume}>Resume</button>
+      <button onClick={handleStop}>Stop</button>*/}
     </div>
   );
 };
 
 export default TextToSpeech;
-
-
-
-
-
-
-
-
-
 

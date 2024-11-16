@@ -12,6 +12,7 @@ using System.IO;
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using System.IO.Pipes;
 
 
 namespace RestaurantApp.Services.Implementation
@@ -93,22 +94,10 @@ namespace RestaurantApp.Services.Implementation
         {
             try
             {
-                /*var menuToDelete = _context.Tmenus.Include(e => e.TdishType)
-                                        .FirstOrDefault(e => e.Id == id);
-                _context.Tmenus.Remove(menuToDelete);
-                _context.SaveChanges();
-
-
-                var ingredientsToDelete = _context.TcompositionPositions.Where(e => e.TmenuId.Equals(id)).ToList();
-                foreach(var el in ingredientsToDelete)
-                {
-                    _context.TcompositionPositions.Remove(el);
-                }
-                _context.SaveChanges();*/
                 using (var transaction = _context.Database.BeginTransaction())
                 {
                         var menuToDelete = _context.Tmenus
-                                                   .Include(e => e.TcompositionPositions) // Dodanie includowania TcompositionPositions do pobranych Tmenus
+                                                   .Include(e => e.TcompositionPositions) 
                                                    .FirstOrDefault(e => e.Id == id);
                         if (menuToDelete != null)
                         {
@@ -116,7 +105,6 @@ namespace RestaurantApp.Services.Implementation
                             _context.SaveChanges();
                         }
 
-                        // Usunięcie powiązanych rekordów z TcompositionPositions
                         var compositionPositionsToDelete = _context.TcompositionPositions
                                                                    .Where(e => e.TmenuId == id)
                                                                    .ToList();
@@ -132,14 +120,6 @@ namespace RestaurantApp.Services.Implementation
                         transaction.Commit();
                     }
 
-                
-
-                /*string filePath = Path.Combine(_hostEnvironment.ContentRootPath, "Images", menuToDelete.Name + ".png");
-                if (System.IO.File.Exists(filePath))
-                {
-                    System.IO.File.Delete(filePath);
-                }*/
-
                 return Ok();
             }
             catch (Exception ex)
@@ -150,7 +130,7 @@ namespace RestaurantApp.Services.Implementation
 
 
 
-        public IActionResult AddDish(ModelMenuWithPicture Dish, ModelListOfIngredients Ingredients)
+        public IActionResult AddDish(ModelMenuWithPicture Dish, ModelListOfIngredients Ingredients) //Task because of await in stream
         {
         try
         {
@@ -181,10 +161,13 @@ namespace RestaurantApp.Services.Implementation
             _context.SaveChanges();
 
             //PICTURE DISH
-            using (var fileStream = new FileStream(imagePath, FileMode.Create))
+            Task.Run(async () => //parallel task, to not block main thread
             {
-                Dish.ImageFile.CopyToAsync(fileStream);
-            }
+                using (var fileStream = new FileStream(imagePath, FileMode.Create))
+                {
+                    await Dish.ImageFile.CopyToAsync(fileStream);
+                } 
+            });
 
             //TAKE ID OF NEW CREATED DISH
             var idMenuNew = _context.Tmenus.Where(d => d.Name.Equals(Dish.Name)).Select(c => c.Id).FirstOrDefault();
@@ -248,8 +231,6 @@ namespace RestaurantApp.Services.Implementation
         try
         {
             
-
-
             /*if (Dish.NewName != "")
             {
                 recordToUpdate.Name = Dish.NewName;
